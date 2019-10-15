@@ -2,7 +2,7 @@ package Sort;
 
 public class InsertionSort {
 
-    private static void insertionsort(int[] liste) {
+    private static void insertionSort(int[] liste) {
         for (int index = 1; index < liste.length ; index++) {
             int value = liste[index];
             int jumpIndex = index;
@@ -16,7 +16,7 @@ public class InsertionSort {
 
     public static void main(String[] args) {
         int[] liste = {0, 9, 4, 6, 2, 8, 5, 1, 7, 3};
-        insertionsort(liste);
+        insertionSort(liste);
         for (int value : liste)
             System.out.print(value + " ");
     }
