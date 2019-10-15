@@ -8,5 +8,19 @@
     <artifactId>mod411_manuel_werder</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <java.version>1.11</java.version>
+        <maven.compiler.source>1.11</maven.compiler.source>
+        <maven.compiler.target>1.11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.jetbrains/annotations-java5 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.jetbrains</groupId>-->
+<!--            <artifactId>annotations-java5</artifactId>-->
+<!--            <version>17.0.0</version>-->
+<!--        </dependency>-->
+    </dependencies>
 
 </project>
