@@ -12,6 +12,7 @@ public class GameOfLifeTest {
 
 	GameOfLife game;
 	boolean[][] welt;
+	boolean[][] erwarteteWelt;
 
 	@BeforeEach
 	void setup() {
@@ -19,11 +20,16 @@ public class GameOfLifeTest {
 		welt = game.initToteWelt();
 	}
 
+	@Test
+	void initToteWelt() {
+		boolean[][] erwarteteWelt = new boolean[3][3];
+		assertArrayEquals(welt, erwarteteWelt);
+	}
 
 	@Test
 	void regelEinsStibtAnEinsamkeit() {
 		welt[1][1] = true;
-		boolean[][] erwarteteWelt = game.initToteWelt();
+		erwarteteWelt = game.initToteWelt();
 		boolean[][] gen1 = welt;
 
 		if (game.regelEinsStibtAnEinsamkeit(welt, 1, 1)) {
@@ -40,7 +46,7 @@ public class GameOfLifeTest {
 		welt[0][2] = true;
 		welt[2][0] = true;
 		welt[1][1] = true;
-		boolean[][] erwarteteWelt = welt;
+		erwarteteWelt = welt;
 		erwarteteWelt[1][1] = false;
 		boolean[][] gen1 = welt;
 
@@ -57,7 +63,7 @@ public class GameOfLifeTest {
 		welt[2][2] = true;
 		welt[0][2] = true;
 		welt[1][1] = false;
-		boolean[][] erwarteteWelt = welt;
+		erwarteteWelt = welt;
 		erwarteteWelt[1][1] = true;
 		boolean[][] gen1 = welt;
 
