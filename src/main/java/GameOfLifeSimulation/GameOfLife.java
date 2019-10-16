@@ -5,13 +5,22 @@ import java.util.Random;
 public class GameOfLife {
 
     // Global definierte Konstanten für die beiden Dimensionen
-    private final static int DIM1 = 12;
-    private final static int DIM2 = 12;
+    private static int DIM1;
+    private static int DIM2;
+
+    public GameOfLife(int rows, int columns) {
+        DIM1 = rows;
+        DIM2 = columns;
+    }
+
+    public GameOfLife() {
+        new GameOfLife(12, 12);
+    }
 
     // Liefert eine zufällig initialisierte Welt
     public boolean[][] initWelt() {
         Random rand = new Random();
-        boolean[][] welt = new boolean[GameOfLife.DIM1][GameOfLife.DIM2];
+        boolean[][] welt = new boolean[DIM1][DIM2];
         for (int x = 0; x < GameOfLife.DIM1; x++) {
             for (int y = 0; y < GameOfLife.DIM2; y++) {
                 if (rand.nextInt(200000) % 2 == 0){
@@ -44,10 +53,12 @@ public class GameOfLife {
             for (int y = 0; y < DIM2; y++ ) {
                 int nachbarn = anzahlNachbarn(welt, x, y);
                 if (welt[x][y]) {
-                    if (nachbarn  < 2 || nachbarn > 3)
+                    // Regel 3 wird implizit getestet durch regel 1 und 2.
+                    if (regelEinsStibtAnEinsamkeit(nachbarn) ||
+                            regelZweiStribtAnUeberbevoelkerung(nachbarn))
                         neueWelt[x][y] = false;
                 } else {
-                    if (nachbarn == 3)
+                    if (regelVierWridZumLebenErweckt(nachbarn))
                         neueWelt[x][y] = true;
                 }
             }
@@ -55,11 +66,26 @@ public class GameOfLife {
         return neueWelt;
     }
 
+    // 1. Jede lebendige Zelle, die weniger als zwei lebendige Nachbarn hat, stirbt an Einsamkeit.
+    public boolean regelEinsStibtAnEinsamkeit(int nachbarn) {
+        return nachbarn < 2;
+    }
+
+    // 2. Jede lebendige Zelle mit mehr als drei lebendigen Nachbarn stirbt an Überbevölkerung.
+    public boolean regelZweiStribtAnUeberbevoelkerung(int nachbarn) {
+        return nachbarn > 3;
+    }
+
+    // 4. Jede tote Zelle mit genau drei lebendigen Nachbarn wird wieder zum Leben erweckt.
+    public boolean regelVierWridZumLebenErweckt(int nachbarn) {
+        return nachbarn == 3;
+    }
+
     // Liefert Anzahl Nachbarn einer Zelle
     private int anzahlNachbarn(boolean[][] welt, int x, int y) {
         int returnValue = 0;
-        for (int i = x - (x == 0 ? 0 : 1); i <= x + (x == 11 ? 0 : 1); ++i)
-            for (int j = y - (y == 0 ? 0 : 1); j <= y + (y == 11 ? 0 : 1); ++j)
+        for (int i = x - (x == 0 ? 0 : 1); i <= x + (x == (DIM1 - 1) ? 0 : 1); ++i)
+            for (int j = y - (y == 0 ? 0 : 1); j <= y + (y == (DIM2 - 1) ? 0 : 1); ++j)
                 if (welt[i][j])
                     returnValue += 1;
         // einen Nachbarn zuviel mitgezählt?
