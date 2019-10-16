@@ -9,7 +9,7 @@ public class GameOfLife {
     private final static int DIM2 = 12;
 
     // Liefert eine zufällig initialisierte Welt
-    private boolean[][] initWelt() {
+    public boolean[][] initWelt() {
         Random rand = new Random();
         boolean[][] welt = new boolean[GameOfLife.DIM1][GameOfLife.DIM2];
         for (int x = 0; x < GameOfLife.DIM1; x++) {
@@ -24,7 +24,7 @@ public class GameOfLife {
 
 
     // Gibt die aktuelle Welt aus
-    private void zeigeWelt(boolean[][] welt) {
+    public void zeigeWelt(boolean[][] welt) {
         for (int x = 0; x < GameOfLife.DIM1 ; x++) {
             for (int y = 0; y < GameOfLife.DIM2; y++) {
                 System.out.print((welt[x][y]? 1 : 0) + "  ");
@@ -38,7 +38,7 @@ public class GameOfLife {
     // 2. Jede lebendige Zelle mit mehr als drei lebendigen Nachbarn stirbt an Überbevölkerung.
     // 3. Jede lebendige Zelle mit zwei oder drei Nachbarn fühlt sich wohl und lebt weiter.
     // 4. Jede tote Zelle mit genau drei lebendigen Nachbarn wird wieder zum Leben erweckt.
-    private boolean[][] wendeRegelnAn(boolean[][] welt) {
+    public boolean[][] wendeRegelnAn(boolean[][] welt) {
         boolean[][] neueWelt = welt;
         for (int x = 0; x < DIM1; x++) {
             for (int y = 0; y < DIM2; y++ ) {
@@ -66,37 +66,5 @@ public class GameOfLife {
         if (welt[x][y])
             returnValue -= 1;
         return returnValue;
-    }
-
-    public static void main(String[] args) {
-
-        GameOfLife game = new GameOfLife();
-        SimulationView view = new SimulationView(DIM1, DIM2);
-
-        // Welt initialisieren
-        boolean[][] welt = game.initWelt();
-        int counter = 1;
-        while (view.isActiv(welt)) {
-            view.showStatus(counter, welt);
-            welt = game.wendeRegelnAn(welt);
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if( counter == 100) System.exit(0);
-            counter++;
-        }
-
-
-
-//        System.out.println("Startkonstellation");
-//        game.zeigeWelt(welt);
-//
-//        for (int i = 1; i <= 100; i++) {
-//            welt = game.wendeRegelnAn(welt);
-//            System.out.println("Generation " + i);
-//            game.zeigeWelt(welt);
-//        }
     }
 }
