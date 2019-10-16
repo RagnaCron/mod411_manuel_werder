@@ -56,7 +56,6 @@ public class GameOfLife {
         for (int x = 0; x < DIM1; x++) {
             for (int y = 0; y < DIM2; y++ ) {
                 if (welt[x][y]) {
-//                    neueWelt[x][y] = !(regelEinsStibtAnEinsamkeit(welt, x, y) || regelZweiStribtAnUeberbevoelkerung(welt, x, y));
                     // Regel 3 wird implizit getestet durch regel 1 und 2.
                     if (regelEinsStibtAnEinsamkeit(welt, x, y) || regelZweiStribtAnUeberbevoelkerung(welt, x, y))
                         neueWelt[x][y] = false;
