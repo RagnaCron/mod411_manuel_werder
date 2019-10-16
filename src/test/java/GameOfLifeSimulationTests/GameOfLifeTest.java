@@ -15,7 +15,7 @@ class GameOfLifeTest {
 	@BeforeEach
 	void setup() {
 		game = new GameOfLife(3, 3);
-		welt = game.initToteWelt();
+		welt = game.initDeadWorld();
 	}
 
 	@Test
@@ -27,10 +27,10 @@ class GameOfLifeTest {
 	@Test
 	void regelEinsStibtAnEinsamkeit() {
 		welt[1][1] = true;
-		erwarteteWelt = game.initToteWelt();
+		erwarteteWelt = game.initDeadWorld();
 		boolean[][] gen1 = welt;
 
-		if (game.regelEinsStibtAnEinsamkeit(welt, 1, 1)) {
+		if (game.ruleOneDeathByIsolation(welt, 1, 1)) {
 			gen1[1][1] = false;
 		}
 
@@ -48,7 +48,7 @@ class GameOfLifeTest {
 		erwarteteWelt[1][1] = false;
 		boolean[][] gen1 = welt;
 
-		if (game.regelZweiStribtAnUeberbevoelkerung(welt, 1, 1)) {
+		if (game.ruleTwoDeathByOverpopulation(welt, 1, 1)) {
 			gen1[1][1] = false;
 		}
 
@@ -65,7 +65,7 @@ class GameOfLifeTest {
 		erwarteteWelt[1][1] = true;
 		boolean[][] gen1 = welt;
 
-		if (game.regelVierWirdZumLebenErweckt(welt, 1, 1)) {
+		if (game.ruleFourReviveThroughNeighbors(welt, 1, 1)) {
 			gen1[1][1] = true;
 		}
 

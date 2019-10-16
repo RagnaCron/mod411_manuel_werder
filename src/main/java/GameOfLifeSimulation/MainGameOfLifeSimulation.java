@@ -4,15 +4,17 @@ public class MainGameOfLifeSimulation {
 
 	public static void main(String[] args) {
 
-		GameOfLife game = new GameOfLife();
-		SimulationView view = new SimulationView(12, 12);
+		int size = 50;
 
-		// Welt initialisieren
-		boolean[][] welt = game.initRandomLebendeWelt();
+		GameOfLife game = new GameOfLife(size,size);
+		SimulationView view = new SimulationView(size, size);
+
+		boolean[][] welt = game.initRandomPopulatedWorld();
 		int counter = 1;
+
 		while (view.isActiv(welt)) {
 			view.showStatus(welt);
-			welt = game.wendeRegelnAn(welt);
+			welt = game.submitToTheRules(welt);
 			try {
 				Thread.sleep(200);
 			} catch (InterruptedException e) {
