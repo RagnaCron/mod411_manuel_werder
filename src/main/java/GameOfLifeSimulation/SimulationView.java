@@ -58,10 +58,9 @@ public class SimulationView extends JFrame {
     /**
      * Zeige den aktuellen Zustand des Feldes.
      *
-     * @param step welcher Iterationsschritt ist dies.
      * @param world   die welt.
      */
-    public void showStatus(int step, boolean[][] world) {
+    public void showStatus(boolean[][] world) {
         if (!isVisible())
             setVisible(true);
 

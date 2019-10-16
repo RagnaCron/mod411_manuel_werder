@@ -11,7 +11,7 @@ public class MainGameOfLifeSimulation {
 		boolean[][] welt = game.initRandomLebendeWelt();
 		int counter = 1;
 		while (view.isActiv(welt)) {
-			view.showStatus(counter, welt);
+			view.showStatus(welt);
 			welt = game.wendeRegelnAn(welt);
 			try {
 				Thread.sleep(200);
