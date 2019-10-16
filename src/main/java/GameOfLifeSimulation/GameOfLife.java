@@ -51,14 +51,14 @@ public class GameOfLife {
     // 2. Jede lebendige Zelle mit mehr als drei lebendigen Nachbarn stirbt an Überbevölkerung.
     // 3. Jede lebendige Zelle mit zwei oder drei Nachbarn fühlt sich wohl und lebt weiter.
     // 4. Jede tote Zelle mit genau drei lebendigen Nachbarn wird wieder zum Leben erweckt.
-    public boolean[][] wendeRegelnAn(boolean[][] welt) {
+    boolean[][] wendeRegelnAn(boolean[][] welt) {
         boolean[][] neueWelt = welt;
         for (int x = 0; x < DIM1; x++) {
             for (int y = 0; y < DIM2; y++ ) {
                 if (welt[x][y]) {
+//                    neueWelt[x][y] = !(regelEinsStibtAnEinsamkeit(welt, x, y) || regelZweiStribtAnUeberbevoelkerung(welt, x, y));
                     // Regel 3 wird implizit getestet durch regel 1 und 2.
-                    if (regelEinsStibtAnEinsamkeit(welt, x, y) ||
-                            regelZweiStribtAnUeberbevoelkerung(welt, x, y))
+                    if (regelEinsStibtAnEinsamkeit(welt, x, y) || regelZweiStribtAnUeberbevoelkerung(welt, x, y))
                         neueWelt[x][y] = false;
                 } else {
                         neueWelt[x][y] = regelVierWirdZumLebenErweckt(welt, x, y);

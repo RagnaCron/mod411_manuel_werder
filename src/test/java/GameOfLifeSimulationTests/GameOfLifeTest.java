@@ -6,13 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Iterator;
+class GameOfLifeTest {
 
-public class GameOfLifeTest {
-
-	GameOfLife game;
-	boolean[][] welt;
-	boolean[][] erwarteteWelt;
+	private GameOfLife game;
+	private boolean[][] welt;
+	private boolean[][] erwarteteWelt;
 
 	@BeforeEach
 	void setup() {
