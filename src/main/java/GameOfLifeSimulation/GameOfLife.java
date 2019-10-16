@@ -4,30 +4,39 @@ import java.util.Random;
 
 public class GameOfLife {
 
-    // Global definierte Konstanten für die beiden Dimensionen
-    private final static int DIM1 = 12;
-    private final static int DIM2 = 12;
+    private int DIM1;
+    private int DIM2;
 
-    // Liefert eine zufällig initialisierte Welt
-    private boolean[][] initWelt() {
+    public GameOfLife(int rows, int columns) {
+        DIM1 = rows;
+        DIM2 = columns;
+    }
+
+    public GameOfLife() {
+        new GameOfLife(12, 12);
+    }
+
+    boolean[][] initRandomPopulatedWorld() {
         Random rand = new Random();
-        boolean[][] welt = new boolean[GameOfLife.DIM1][GameOfLife.DIM2];
-        for (int x = 0; x < GameOfLife.DIM1; x++) {
-            for (int y = 0; y < GameOfLife.DIM2; y++) {
+        boolean[][] world = new boolean[DIM1][DIM2];
+        for (int x = 0; x < DIM1; x++) {
+            for (int y = 0; y < DIM2; y++) {
                 if (rand.nextInt(200000) % 2 == 0){
-                    welt[x][y] = true;
+                    world[x][y] = true;
                 }
             }
         }
-        return welt;
+        return world;
     }
 
+    public boolean[][] initDeadWorld() {
+    	return new boolean[DIM1][DIM2];
+	}
 
-    // Gibt die aktuelle Welt aus
-    private void zeigeWelt(boolean[][] welt) {
-        for (int x = 0; x < GameOfLife.DIM1 ; x++) {
-            for (int y = 0; y < GameOfLife.DIM2; y++) {
-                System.out.print((welt[x][y]? 1 : 0) + "  ");
+    public void printOurWorld(boolean[][] world) {
+        for (int x = 0; x < DIM1 ; x++) {
+            for (int y = 0; y < DIM2; y++) {
+                System.out.print((world[x][y]? 1 : 0) + "  ");
             }
             System.out.println();
         }
@@ -38,65 +47,47 @@ public class GameOfLife {
     // 2. Jede lebendige Zelle mit mehr als drei lebendigen Nachbarn stirbt an Überbevölkerung.
     // 3. Jede lebendige Zelle mit zwei oder drei Nachbarn fühlt sich wohl und lebt weiter.
     // 4. Jede tote Zelle mit genau drei lebendigen Nachbarn wird wieder zum Leben erweckt.
-    private boolean[][] wendeRegelnAn(boolean[][] welt) {
-        boolean[][] neueWelt = welt;
+    boolean[][] submitToTheRules(boolean[][] world) {
+        boolean[][] newGen = world;
         for (int x = 0; x < DIM1; x++) {
             for (int y = 0; y < DIM2; y++ ) {
-                int nachbarn = anzahlNachbarn(welt, x, y);
-                if (welt[x][y]) {
-                    if (nachbarn  < 2 || nachbarn > 3)
-                        neueWelt[x][y] = false;
+                if (world[x][y]) {
+                    // Regel 3 wird implizit getestet durch regel 1 und 2.
+                    if (ruleOneDeathByIsolation(world, x, y) || ruleTwoDeathByOverpopulation(world, x, y))
+                        newGen[x][y] = false;
                 } else {
-                    if (nachbarn == 3)
-                        neueWelt[x][y] = true;
+                        newGen[x][y] = ruleFourReviveThroughNeighbors(world, x, y);
                 }
             }
         }
-        return neueWelt;
+        return newGen;
+    }
+
+    // 1. Jede lebendige Zelle, die weniger als zwei lebendige Nachbarn hat, stirbt an Einsamkeit.
+    public boolean ruleOneDeathByIsolation(boolean[][] world, int x, int y) {
+        return (countNeighbors(world, x, y) < 2);
+    }
+
+    // 2. Jede lebendige Zelle mit mehr als drei lebendigen Nachbarn stirbt an Überbevölkerung.
+    public boolean ruleTwoDeathByOverpopulation(boolean[][] world, int x, int y) {
+        return (countNeighbors(world, x, y) > 3);
+    }
+
+    // 4. Jede tote Zelle mit genau drei lebendigen Nachbarn wird wieder zum Leben erweckt.
+    public boolean ruleFourReviveThroughNeighbors(boolean[][] world, int x, int y) {
+        return countNeighbors(world, x, y) == 3;
     }
 
     // Liefert Anzahl Nachbarn einer Zelle
-    private int anzahlNachbarn(boolean[][] welt, int x, int y) {
+    private int countNeighbors(boolean[][] world, int x, int y) {
         int returnValue = 0;
-        for (int i = x - (x == 0 ? 0 : 1); i <= x + (x == 11 ? 0 : 1); ++i)
-            for (int j = y - (y == 0 ? 0 : 1); j <= y + (y == 11 ? 0 : 1); ++j)
-                if (welt[i][j])
+        for (int i = x - (x == 0 ? 0 : 1); i <= x + (x == (DIM1 - 1) ? 0 : 1); ++i)
+            for (int j = y - (y == 0 ? 0 : 1); j <= y + (y == (DIM2 - 1) ? 0 : 1); ++j)
+                if (world[i][j])
                     returnValue += 1;
         // einen Nachbarn zuviel mitgezählt?
-        if (welt[x][y])
+        if (world[x][y])
             returnValue -= 1;
         return returnValue;
-    }
-
-    public static void main(String[] args) {
-
-        GameOfLife game = new GameOfLife();
-        SimulationView view = new SimulationView(DIM1, DIM2);
-
-        // Welt initialisieren
-        boolean[][] welt = game.initWelt();
-        int counter = 1;
-        while (view.isActiv(welt)) {
-            view.showStatus(counter, welt);
-            welt = game.wendeRegelnAn(welt);
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if( counter == 100) System.exit(0);
-            counter++;
-        }
-
-
-
-//        System.out.println("Startkonstellation");
-//        game.zeigeWelt(welt);
-//
-//        for (int i = 1; i <= 100; i++) {
-//            welt = game.wendeRegelnAn(welt);
-//            System.out.println("Generation " + i);
-//            game.zeigeWelt(welt);
-//        }
     }
 }

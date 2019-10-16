@@ -2,21 +2,21 @@ package GameOfLifeSimulation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Dictionary;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * URSPRUNG:
  * https://github.com/dsenften/ict-404/tree/master/src/main/java/simulation
  *
- * Eine grafische Ansicht des Simulationsfeldes.
- * Die Ansicht zeigt für jede Position ein gefärbtes Rechteck,
- * das den jeweiligen Inhalt repräsentiert, und hat eine
- * vorgebene Hintergrundfarbe.
+ * A graphical view that simulates fields.
+ * The view shows for each position a colored rectangle,
+ * that displays the given content, and that has a
+ * given background color.
  */
 @SuppressWarnings("WeakerAccess")
 public class SimulationView extends JFrame {
+
+    private int rowSize;
+    private int columnSize;
 
     // Die Farbe für True
     private static final Color LIFE_COLOR = Color.BLACK;
@@ -28,18 +28,20 @@ public class SimulationView extends JFrame {
     private FieldView fieldView;
 
     /**
-     * Erzeuge eine Ansicht mit der gegebenen Breite und Höhe.
+     * Creates a view with the given height and with.
      *
-     * @param height Die Höhe der Simulation.
-     * @param width  Die Breite der Simulation.
+     * @param rowSize The height of the Simulation.
+     * @param columnSize  The width of the Simulation.
      */
-    public SimulationView(int height, int width) {
+    public SimulationView(int rowSize, int columnSize) {
+        this.rowSize = rowSize;
+        this.columnSize = columnSize;
 
-        setTitle("Simulation von Leben und Tot");
+        setTitle("Simulation of Life and Death");
 
         setLocation(100, 50);
 
-        fieldView = new FieldView(height, width);
+        fieldView = new FieldView(rowSize, columnSize);
 
         Container container = getContentPane();
         container.add(fieldView, BorderLayout.CENTER);
@@ -49,26 +51,25 @@ public class SimulationView extends JFrame {
     }
 
     /**
-     * @return die definierte Farbe für die gegebene Tierklasse.
+     * @return Defines the color of the current field.
      */
     private Color getColor(boolean[][] world, int x, int y) {
         return world[x][y] ? LIFE_COLOR : DEAD_COLOR;
     }
 
     /**
-     * Zeige den aktuellen Zustand des Feldes.
+     * Shows the current stat of the field.
      *
-     * @param step welcher Iterationsschritt ist dies.
-     * @param world   die welt.
+     * @param world The world.
      */
-    public void showStatus(int step, boolean[][] world) {
+    public void showStatus(boolean[][] world) {
         if (!isVisible())
             setVisible(true);
 
         fieldView.prepareView();
 
-        for (int row = 0; row < 12; row++) {
-            for (int column = 0; column < 12; column++) {
+        for (int row = 0; row < rowSize; row++) {
+            for (int column = 0; column < columnSize; column++) {
                 fieldView.drawField(column, row, getColor(world, row, column));
             }
         }
@@ -76,14 +77,14 @@ public class SimulationView extends JFrame {
     }
 
     /**
-     * Entscheide, ob die Simulation weiterlaufen soll.
+     * Deside, if the animation should go on.
      *
-     * @return true wenn noch mehr als eine feld true ist.
+     * @return True when more then to fields are a life.
      */
     public boolean isActiv(boolean[][] world) {
         int counter = 0;
-        for (int x = 0; x < 12; x++) {
-            for (int y = 0; y < 12; y++) {
+        for (int x = 0; x < rowSize; x++) {
+            for (int y = 0; y < columnSize; y++) {
                 if (world[x][y]) counter++;
             }
         }
