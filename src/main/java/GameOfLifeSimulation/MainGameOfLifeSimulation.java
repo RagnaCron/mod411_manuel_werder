@@ -8,7 +8,7 @@ public class MainGameOfLifeSimulation {
 		SimulationView view = new SimulationView(12, 12);
 
 		// Welt initialisieren
-		boolean[][] welt = game.initWelt();
+		boolean[][] welt = game.initRandomLebendeWelt();
 		int counter = 1;
 		while (view.isActiv(welt)) {
 			view.showStatus(counter, welt);
