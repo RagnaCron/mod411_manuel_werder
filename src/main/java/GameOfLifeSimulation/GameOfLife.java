@@ -1,7 +1,6 @@
 package GameOfLifeSimulation;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class GameOfLife {
 
@@ -40,22 +39,21 @@ public class GameOfLife {
     // 3. Jede lebendige Zelle mit zwei oder drei Nachbarn fühlt sich wohl und lebt weiter.
     // 4. Jede tote Zelle mit genau drei lebendigen Nachbarn wird wieder zum Leben erweckt.
     private boolean[][] wendeRegelnAn(boolean[][] welt) {
-        for (int x = 0; x < GameOfLife.DIM1; x++) {
-            for (int y = 0; y < GameOfLife.DIM2; y++ ) {
+        boolean[][] neueWelt = welt;
+        for (int x = 0; x < DIM1; x++) {
+            for (int y = 0; y < DIM2; y++ ) {
                 int nachbarn = anzahlNachbarn(welt, x, y);
                 if (welt[x][y]) {
-                    if (nachbarn  < 2 || nachbarn > 3) {
-                        welt[x][y] = false;
-                    }
+                    if (nachbarn  < 2 || nachbarn > 3)
+                        neueWelt[x][y] = false;
                 } else {
-                    if (nachbarn == 3) {
-                        welt[x][y] = true;
-                    }
+                    if (nachbarn == 3)
+                        neueWelt[x][y] = true;
                 }
 
             }
         }
-        return welt;
+        return neueWelt;
     }
 
     // Liefert Anzahl Nachbarn einer Zelle
@@ -75,6 +73,7 @@ public class GameOfLife {
 
         GameOfLife game = new GameOfLife();
         SimulationView view = new SimulationView(DIM1, DIM2);
+
         // Welt initialisieren
         boolean[][] welt = game.initWelt();
         int counter = 1;
