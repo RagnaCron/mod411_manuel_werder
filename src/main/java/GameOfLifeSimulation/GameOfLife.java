@@ -50,7 +50,6 @@ public class GameOfLife {
                     if (nachbarn == 3)
                         neueWelt[x][y] = true;
                 }
-
             }
         }
         return neueWelt;
@@ -60,7 +59,7 @@ public class GameOfLife {
     private int anzahlNachbarn(boolean[][] welt, int x, int y) {
         int returnValue = 0;
         for (int i = x - (x == 0 ? 0 : 1); i <= x + (x == 11 ? 0 : 1); ++i)
-            for (int j = y -(y == 0 ? 0 : 1); j <= y + (y == 11 ? 0 : 1); ++j)
+            for (int j = y - (y == 0 ? 0 : 1); j <= y + (y == 11 ? 0 : 1); ++j)
                 if (welt[i][j])
                     returnValue += 1;
         // einen Nachbarn zuviel mitgezählt?
