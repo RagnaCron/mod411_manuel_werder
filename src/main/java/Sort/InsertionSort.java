@@ -2,6 +2,7 @@ package Sort;
 
 public class InsertionSort<T extends Comparable<T>> implements Sort<T> {
 
+    @Override
     public void sort(T[] list) {
         for (int index = 1; index < list.length ; index++) {
             T value = list[index];
