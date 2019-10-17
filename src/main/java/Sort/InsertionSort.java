@@ -1,12 +1,12 @@
 package Sort;
 
-public class Insertion {
+public class InsertionSort<T extends Comparable<T>> implements Sort<T> {
 
-    public static void sort(int[] list) {
+    public void sort(T[] list) {
         for (int index = 1; index < list.length ; index++) {
-            int value = list[index];
+            T value = list[index];
             int jumpIndex = index;
-            while (jumpIndex > 0 && list[jumpIndex - 1] > value) {
+            while (jumpIndex > 0 && list[jumpIndex - 1].compareTo(value) > 0) {
                 list[jumpIndex] = list[jumpIndex -1];
                 jumpIndex--;
             }
