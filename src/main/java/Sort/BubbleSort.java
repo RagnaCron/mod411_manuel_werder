@@ -1,23 +1,18 @@
 package Sort;
 
-public class BubbleSort {
+public class BubbleSort<T extends Comparable<T>> implements Sort<T> {
 
-    private static void bubbleSort(int[] liste) {
-        for (int index = liste.length; index > 1; --index) {
+	@Override
+    public void sort(T[] list) {
+        for (int index = list.length; index > 1; --index) {
             for (int i = 0; i < index - 1; ++i) {
-                if (liste[i] > liste[i + 1]) {
-                    int value = liste[i];
-                    liste[i] = liste[i + 1];
-                    liste[i + 1] = value;
-                }
+				if (list[i].compareTo(list[i + 1]) > 0) {
+					T value = list[i];
+					list[i] = list[i + 1];
+					list[i + 1] = value;
+				}
             }
         }
-    }
-
-    public static void main(String[] args) {
-        int[] liste = {0, 9, 4, 6, 2, 8, 5, 1, 7, 3};
-        bubbleSort(liste);
-        for (int value : liste) System.out.print(value + " ");
     }
 
 }

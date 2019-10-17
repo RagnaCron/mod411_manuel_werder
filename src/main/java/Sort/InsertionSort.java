@@ -1,24 +1,17 @@
 package Sort;
 
-public class InsertionSort {
+public class InsertionSort<T extends Comparable<T>> implements Sort<T> {
 
-    private static void insertionSort(int[] liste) {
-        for (int index = 1; index < liste.length ; index++) {
-            int value = liste[index];
+    public void sort(T[] list) {
+        for (int index = 1; index < list.length ; index++) {
+            T value = list[index];
             int jumpIndex = index;
-            while (jumpIndex > 0 && liste[jumpIndex - 1] > value) {
-                liste[jumpIndex] = liste[jumpIndex -1];
+            while (jumpIndex > 0 && list[jumpIndex - 1].compareTo(value) > 0) {
+                list[jumpIndex] = list[jumpIndex -1];
                 jumpIndex--;
             }
-            liste[jumpIndex] = value;
+            list[jumpIndex] = value;
         }
-    }
-
-    public static void main(String[] args) {
-        int[] liste = {0, 9, 4, 6, 2, 8, 5, 1, 7, 3};
-        insertionSort(liste);
-        for (int value : liste)
-            System.out.print(value + " ");
     }
 
 }
