@@ -3,6 +3,7 @@ package Sort;
 public class SortingMain {
 
 	public static void main(String[] args) {
+
 		Integer[] integerList1 = {12, 0, 9, 10, 4, 6, 13, 2, 8, 5, -1, 11, 1, 7, 3, 14, -2};
 		BubbleSort<Integer> integerBubbleSort = new BubbleSort<Integer>();
 		long startTimeIntegerBubbleSort = System.nanoTime();
@@ -25,7 +26,7 @@ public class SortingMain {
 
 		System.out.println();
 
-		String[] stringList1 = {"v", "p", "l", "q", "c", "g", "h", "d", "o", "x", "r", "z", "a", "t", "m", "k", "f", "y", "w", "u", "i", "b", "e", "j", "s", "n" };
+		String[] stringList1 = {"v", "p", "l", "q", "c", "g", "h", "d", "o", "x", "r", "z", "a", "t", "m", "k", "f", "y", "w", "u", "i", "b", "e", "j", "s", "n"};
 		BubbleSort<String> stringBubbleSort = new BubbleSort<String>();
 		long startTimeStringBubbleSort = System.nanoTime();
 		stringBubbleSort.sort(stringList1);
@@ -36,7 +37,7 @@ public class SortingMain {
 
 		System.out.println();
 
-		String[] stringList2 = {"v", "p", "l", "q", "c", "g", "h", "d", "o", "x", "r", "z", "a", "t", "m", "k", "f", "y", "w", "u", "i", "b", "e", "j", "s", "n" };
+		String[] stringList2 = {"v", "p", "l", "q", "c", "g", "h", "d", "o", "x", "r", "z", "a", "t", "m", "k", "f", "y", "w", "u", "i", "b", "e", "j", "s", "n"};
 		InsertionSort<String> stringInsertionSort = new InsertionSort<String>();
 		long startTimeStringInsertionSort = System.nanoTime();
 		stringInsertionSort.sort(stringList2);
@@ -46,6 +47,5 @@ public class SortingMain {
 		for (String value : stringList2) System.out.print(value + " ");
 
 	}
-
 
 }
