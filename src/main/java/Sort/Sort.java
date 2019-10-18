@@ -1,6 +1,8 @@
 package Sort;
 
+@FunctionalInterface
 public interface Sort<T> {
 
-	public void sort(T[] list);
+	void sort(T[] list);
+
 }
