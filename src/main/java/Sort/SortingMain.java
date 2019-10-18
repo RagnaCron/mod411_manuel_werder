@@ -19,7 +19,7 @@ public class SortingMain {
 		System.out.println();
 
 		Integer[] integerList2 = {12, 0, 9, 10, 4, 6, 13, 2, 8, 5, -1, 11, 1, 7, 3, 14, -2};
-		measureRuntime(integerList1, "InsertionSort", "Integer", new InsertionSort<Integer>());
+		measureRuntime(integerList2, "InsertionSort", "Integer", new InsertionSort<Integer>());
 
 		System.out.println();
 
