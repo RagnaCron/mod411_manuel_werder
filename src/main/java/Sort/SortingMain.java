@@ -7,7 +7,13 @@ public class SortingMain {
 
 	private final static String[] ABC_LIST = {
 			"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-			"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+			"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+			"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+			"n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+			"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "<", ".", ":",
+			",", ";", "-", "_", "{", "}", "[", "]", "+", "¦", "@", "*", "#",
+			"%", "&", "°", "¬", "/", "|", "(", "¢", ")", "=", "'", "?", "´",
+			"^", "`", "~", "!", "¨", "$", "£", ">", "\\"
 	};
 
 	private static String[] getRandomStringList(int size) {
@@ -17,9 +23,9 @@ public class SortingMain {
 		return list;
 	}
 
-	private static int[] getRandomIntList(int size) {
+	private static Integer[] getRandomIntegerList(int size) {
 		Random rand = new Random();
-		int[] list = new int[size];
+		Integer[] list = new Integer[size];
 		for (int i = 0; i < size; i++) list[i] = rand.nextInt();
 		return list;
 	}
@@ -36,32 +42,32 @@ public class SortingMain {
 	public static void main(String[] args) {
 		System.out.println();
 
-		Integer[] integerList1 = {12, 0, 9, 10, 4, 6, 13, 2, 8, 5, -1, 11, 1, 7, 3, 14, -2};
+		Integer[] integerList1 = getRandomIntegerList(10000);
 		measureRuntime(integerList1, "BubbleSort", "Integer", list -> new BubbleSort<Integer>().sort(list));
 
-		System.out.println();
+		System.out.println("\n");
 
-		String[] stringList1 = getRandomStringList(100);
+		String[] stringList1 = getRandomStringList(10000);
 		measureRuntime(stringList1, "BubbleSort", "String", list -> new BubbleSort<String>().sort(list));
 
 		System.out.println("\n");
 
-		Integer[] integerList2 = {12, 0, 9, 10, 4, 6, 13, 2, 8, 5, -1, 11, 1, 7, 3, 14, -2};
+		Integer[] integerList2 = getRandomIntegerList(10000);
 		measureRuntime(integerList2, "InsertionSort", "Integer", list ->  new InsertionSort<Integer>().sort(list));
 
-		System.out.println();
+		System.out.println("\n");
 
-		String[] stringList2 = getRandomStringList(100);
+		String[] stringList2 = getRandomStringList(10000);
 		measureRuntime(stringList2, "InsertionSort", "String", list -> new InsertionSort<String>().sort(list));
 
 		System.out.println("\n");
 
-		Integer[] integerList3 = {12, 0, 9, 10, 4, 6, 13, 2, 8, 5, -1, 11, 1, 7, 3, 14, -2};
+		Integer[] integerList3 = getRandomIntegerList(10000);
 		measureRuntime(integerList3, "QuickSort", "Integer", list ->  new QuickSort<Integer>().sort(list));
 
-		System.out.println();
+		System.out.println("\n");
 
-		String[] stringList3 = getRandomStringList(100);
+		String[] stringList3 = getRandomStringList(10000);
 		measureRuntime(stringList3, "QuickSort", "String", list -> new QuickSort<String>().sort(list));
 
 	}

@@ -9,15 +9,17 @@ public class QuickSort<T extends Comparable<T>> implements Sort<T> {
 		quickSort(list, 0, list.length - 1);
 	}
 
+//	Version 1
 	private void quickSort(T[] list, int leftSide, int rightSide) {
-		if (leftSide > rightSide){
-			int i = leftSide;
-			int j = rightSide - 1;
-			do {
-				while (list[i].compareTo(list[rightSide]) < 0) i++;
-				while (list[j].compareTo(list[rightSide]) > 0 && j > i) j--;
-				if (i < j) swap(list, i, j);
-			} while (i < j);
+		if (rightSide > leftSide){
+			int i = leftSide - 1;
+			int j = rightSide;
+			while (true) {
+				while (list[++i].compareTo(list[rightSide]) < 0);
+				while (list[--j].compareTo(list[rightSide]) > 0 && j > i);
+				if (i >= j) break;
+				swap(list, i, j);
+			}
 			swap(list, i, rightSide);
 			quickSort(list, leftSide, i - 1);
 			quickSort(list, i + 1, rightSide);
@@ -30,7 +32,7 @@ public class QuickSort<T extends Comparable<T>> implements Sort<T> {
 		list[j] = temp;
 	}
 
-//  Version 1
+//	Version 1
 //	private void quickSort(T[] list, int leftSide, int rightSide) {
 //		if (rightSide > leftSide){
 //			int i = leftSide - 1;
@@ -43,8 +45,7 @@ public class QuickSort<T extends Comparable<T>> implements Sort<T> {
 //			}
 //			swap(list, i, rightSide);
 //			quickSort(list, leftSide, i - 1);
-//			quickSort(list, i +
-//			1, rightSide);
+//			quickSort(list, i + 1, rightSide);
 //		}
 //	}
 
@@ -70,4 +71,19 @@ public class QuickSort<T extends Comparable<T>> implements Sort<T> {
 //		return i;
 //	}
 
+//	version 3
+//	private void quickSort(T[] list, int leftSide, int rightSide) {
+//		if (leftSide < rightSide) {
+//			int i = leftSide;
+//			int j = rightSide - 1;
+//			do {
+//				while (i < rightSide && list[i].compareTo(list[rightSide]) < 0) i++;
+//				while( j > leftSide && list[j].compareTo(list[rightSide]) >= 0) j--;
+//				if (i < j) swap(list, i, j);
+//			} while (i < j);
+//			swap(list, i, rightSide);
+//			quickSort(list, leftSide, i - 1);
+//			quickSort(list, i + 1, rightSide);
+//		}
+//	}
 }
