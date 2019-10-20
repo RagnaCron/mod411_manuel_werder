@@ -31,6 +31,7 @@ public class QuickSort<T extends Comparable<T>> implements Sort<T> {
 //		if (rightSide > leftSide){
 //			int i = leftSide - 1;
 //			int j = rightSide;
+//			medianOfThree(list, leftSide, rightSide);
 //			while (true) {
 //				while (list[++i].compareTo(list[rightSide]) < 0);
 //				while (list[--j].compareTo(list[rightSide]) > 0 && j > i);
