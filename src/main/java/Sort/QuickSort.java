@@ -1,7 +1,5 @@
 package Sort;
 
-import java.util.function.Predicate;
-
 public class QuickSort<T extends Comparable<T>> implements Sort<T> {
 
 	@Override
@@ -9,11 +7,11 @@ public class QuickSort<T extends Comparable<T>> implements Sort<T> {
 		quickSort(list, 0, list.length - 1);
 	}
 
-//	Version 1
 	private void quickSort(T[] list, int leftSide, int rightSide) {
 		if (rightSide > leftSide){
 			int i = leftSide - 1;
 			int j = rightSide;
+			medianOfThree(list, leftSide, rightSide);
 			while (true) {
 				while (list[++i].compareTo(list[rightSide]) < 0);
 				while (list[--j].compareTo(list[rightSide]) > 0 && j > i);
@@ -26,13 +24,7 @@ public class QuickSort<T extends Comparable<T>> implements Sort<T> {
 		}
 	}
 
-	private void swap(T[] list, int i, int j) {
-		T temp = list[i];
-		list[i] = list[j];
-		list[j] = temp;
-	}
-
-//	Version 1
+//	Version 1 http://www.linux-related.de/index.html?coding/sort/sort_quick.htm
 //	private void quickSort(T[] list, int leftSide, int rightSide) {
 //		if (rightSide > leftSide){
 //			int i = leftSide - 1;
@@ -49,7 +41,7 @@ public class QuickSort<T extends Comparable<T>> implements Sort<T> {
 //		}
 //	}
 
-//	Version 2
+//	Version 2 https://de.wikipedia.org/wiki/Quicksort
 //	private void quickSort(T[] list, int leftSide, int rightSide) {
 //		if (rightSide > leftSide){
 //			int divider = divide(list, leftSide, rightSide);
@@ -71,11 +63,12 @@ public class QuickSort<T extends Comparable<T>> implements Sort<T> {
 //		return i;
 //	}
 
-//	version 3
+//	version 3 simple changes through me
 //	private void quickSort(T[] list, int leftSide, int rightSide) {
-//		if (leftSide < rightSide) {
+//		if (rightSide > leftSide) {
 //			int i = leftSide;
 //			int j = rightSide - 1;
+//			medianOfThree(list, leftSide, rightSide);
 //			do {
 //				while (i < rightSide && list[i].compareTo(list[rightSide]) < 0) i++;
 //				while( j > leftSide && list[j].compareTo(list[rightSide]) >= 0) j--;
