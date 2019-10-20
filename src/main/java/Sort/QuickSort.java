@@ -7,6 +7,8 @@ public class QuickSort<T extends Comparable<T>> implements Sort<T> {
 		quickSort(list, 0, list.length - 1);
 	}
 
+//	Version 4 http://www.linux-related.de/index.html?coding/sort/sort_quick.htm
+//	Fastest version!
 	private void quickSort(T[] list, int leftSide, int rightSide) {
 		if (rightSide > leftSide){
 			int i = leftSide - 1;
