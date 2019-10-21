@@ -53,22 +53,22 @@ public class SortingMain {
 	public static void main(String[] args) {
 		System.out.println();
 
-		Integer[] bubbleSortIntegerList = getRandomIntegerList(10000);
+		Integer[] bubbleSortIntegerList = getRandomIntegerList(1000);
 		measureRuntime(bubbleSortIntegerList, "BubbleSort", "Integer", list -> new BubbleSort<Integer>().sort(list));
 
 		System.out.println("\n");
 
-		String[] bubbleSortStringList = getRandomStringList(10000);
+		String[] bubbleSortStringList = getRandomStringList(1000);
 		measureRuntime(bubbleSortStringList, "BubbleSort", "String", list -> new BubbleSort<String>().sort(list));
 
 		System.out.println("\n");
 
-		Integer[] insertionSortIntegerList = getRandomIntegerList(10000);
+		Integer[] insertionSortIntegerList = getRandomIntegerList(1000);
 		measureRuntime(insertionSortIntegerList, "InsertionSort", "Integer", list ->  new InsertionSort<Integer>().sort(list));
 
 		System.out.println("\n");
 
-		String[] insertionSortStringList = getRandomStringList(10000);
+		String[] insertionSortStringList = getRandomStringList(1000);
 		measureRuntime(insertionSortStringList, "InsertionSort", "String", list -> new InsertionSort<String>().sort(list));
 
 		System.out.println("\n");
@@ -76,10 +76,10 @@ public class SortingMain {
 		Integer[] quickSortIntegerList = getRandomIntegerList(10000);
 		measureRuntime(quickSortIntegerList, "QuickSort", "Integer", list ->  new QuickSort<Integer>().sort(list));
 
-		System.out.println("\n");
-
-		String[] quickSortIntegerStringList = getRandomIntegerStringList(10000);
-		measureRuntime(quickSortIntegerStringList, "QuickSort", "String", list -> new QuickSort<String>().sort(list));
+//		System.out.println("\n");
+//
+//		String[] quickSortIntegerStringList = getRandomIntegerStringList(10000);
+//		measureRuntime(quickSortIntegerStringList, "QuickSort", "String", list -> new QuickSort<String>().sort(list));
 
 		System.out.println("\n");
 
