@@ -2,6 +2,7 @@ package GameOfLifeSimulation;
 
 import java.util.Random;
 
+@SuppressWarnings("all")
 public class GameOfLife {
 
     private int DIM1;
@@ -19,13 +20,10 @@ public class GameOfLife {
     boolean[][] initRandomPopulatedWorld() {
         Random rand = new Random();
         boolean[][] world = new boolean[DIM1][DIM2];
-        for (int x = 0; x < DIM1; x++) {
-            for (int y = 0; y < DIM2; y++) {
-                if (rand.nextInt(200000) % 2 == 0){
+        for (int x = 0; x < DIM1; x++)
+            for (int y = 0; y < DIM2; y++)
+                if (rand.nextInt(200000) % 2 == 0)
                     world[x][y] = true;
-                }
-            }
-        }
         return world;
     }
 
@@ -35,9 +33,8 @@ public class GameOfLife {
 
     public void printOurWorld(boolean[][] world) {
         for (int x = 0; x < DIM1 ; x++) {
-            for (int y = 0; y < DIM2; y++) {
+            for (int y = 0; y < DIM2; y++)
                 System.out.print((world[x][y]? 1 : 0) + "  ");
-            }
             System.out.println();
         }
     }

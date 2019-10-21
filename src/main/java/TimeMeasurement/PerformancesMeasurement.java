@@ -19,18 +19,19 @@ public class PerformancesMeasurement {
 		System.out.println("Static array, runtime: " +
 				Measurement.measureRuntime(Operations::insertIntoStaticArray,
 						Operations.createIntegerArray( Operations.TEN_MILLION)));
-//		System.out.println("Static array lambda style, runtime: " +
-//				Measurement.measureRuntime(Operations::insertIntoStaticArrayLambdaStyle, Operations.MILLION));
 		System.out.println("Array list, runtime: " +
 				Measurement.measureRuntime(Operations::insertIntoArrayList,
 						Operations.TEN_MILLION));
 
-		System.out.println("\n----- Deleting Performance Testing -----");
-		System.out.println("Static array, runtime: " +
-				Measurement.measureRuntime(Operations::deleteFromArrayList,
+		System.out.println("\n----- Deletion Performance Testing -----");
+		System.out.println("Array list, removing from 0..<n, runtime: " +
+				Measurement.measureRuntime(Operations::deleteFromArrayListFront,
+						Operations.getRandomIntegerArrayList(Operations.HUNDRED_THOUSAND)));
+		System.out.println("Array list, removing form n>..0, runtime, " +
+				Measurement.measureRuntime(Operations::deleteFromArrayListBack,
 						Operations.getRandomIntegerArrayList(Operations.HUNDRED_THOUSAND)));
 
-		System.out.println("\n----- Sorting Performance Testing -----");
+		System.out.println("\n----- Sortation Performance Testing -----");
 		System.out.println("BubbleSort integers, runtime: " +
 				Measurement.measureRuntime(list -> new BubbleSort<Integer>().sort(list),
 						Operations.getRandomIntegerArray(Operations.TEN_THOUSAND)));

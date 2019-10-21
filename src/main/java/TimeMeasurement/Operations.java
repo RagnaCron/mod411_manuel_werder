@@ -1,13 +1,14 @@
 package TimeMeasurement;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
+import java.util.function.Supplier;
 
 @SuppressWarnings("all")
 public class Operations {
 
 	private final static Random rand = new Random();
+	private final static Supplier<Integer> supplie = () -> rand.nextInt();
 
 	private final static String[] ABC_LIST = {
 			"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
@@ -64,11 +65,7 @@ public class Operations {
 
 	public static void insertIntoStaticArray(Integer[] array) {
 		for (int i = 0; i < array.length; i++)
-			array[i] = rand.nextInt();
-	}
-
-	public static void insertIntoStaticArrayLambdaStyle(int size) {
-		Arrays.stream(new Integer[size]).forEach(i -> i = rand.nextInt());
+		    array[i] = rand.nextInt();
 	}
 
 	public static void insertIntoArrayList(int size) {
@@ -77,8 +74,13 @@ public class Operations {
 			arrayList.add(rand.nextInt());
 	}
 
-	public static <T> void deleteFromArrayList(ArrayList<T> list) {
+	public static void deleteFromArrayListFront(ArrayList<Integer> list) {
 		for (int i = 0; i < list.size(); i++)
+			list.remove(i);
+	}
+
+	public static void deleteFromArrayListBack(ArrayList<Integer> list) {
+		for (int i = list.size() - 1; i >= 0; i--)
 			list.remove(i);
 	}
 
