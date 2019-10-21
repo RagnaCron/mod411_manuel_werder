@@ -2,6 +2,7 @@ package TimeMeasurement;
 
 import Sort.BubbleSort;
 import Sort.InsertionSort;
+import Sort.QuickSort;
 
 public class PerformancesMeasurement {
 
@@ -16,12 +17,16 @@ public class PerformancesMeasurement {
 				Measurement.measureRuntime(Operations::insertIntoArrayList, Operations.MILLION));
 
 		System.out.println("\n----- Sorting Performance Testing -----");
-		Integer[] integers = Operations.getRandomIntegerList(Operations.TEN_THOUSAND);
 		System.out.println("BubbleSort integers, runtime: " +
-				Measurement.measureRuntime(list -> new BubbleSort<Integer>().sort(list), integers));
-		integers = Operations.getRandomIntegerList(Operations.TEN_THOUSAND);
+				Measurement.measureRuntime(list -> new BubbleSort<Integer>().sort(list),
+						Operations.getRandomIntegerList(Operations.TEN_THOUSAND)));
 		System.out.println("InsertionSort integers, runtime: " +
-				Measurement.measureRuntime(list -> new InsertionSort<Integer>().sort(list), integers));
+				Measurement.measureRuntime(list -> new InsertionSort<Integer>().sort(list),
+						Operations.getRandomIntegerList(Operations.TEN_THOUSAND)));
+		System.out.println("QuickSort integers, runtime: " +
+				Measurement.measureRuntime(list -> new QuickSort<Integer>().sort(list),
+						Operations.getRandomIntegerList(Operations.TEN_THOUSAND)));
+
 	}
 
 }
