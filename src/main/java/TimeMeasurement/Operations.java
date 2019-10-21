@@ -1,7 +1,12 @@
 package TimeMeasurement;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
+import static java.util.Arrays.*;
+
+@SuppressWarnings("all")
 public class Operations {
 
 	private final static Random rand = new Random();
@@ -16,6 +21,12 @@ public class Operations {
 			"%", "&", "°", "¬", "/", "|", "(", "¢", ")", "=", "'", "?", "´",
 			"^", "`", "~", "!", "¨", "$", "£", ">", "\\"
 	};
+
+	public final static int THOUSAND = 1000;
+	public final static int TEN_THOUSAND = 10_000;
+	public final static int HUNDRED_THOUSAND = 100_000;
+	public final static int MILLION = 1_000_000;
+	public final static int TEN_MILLION = 10_000_000;
 
 	public static String[] getRandomStringList(int size) {
 		String[] list = new String[size];
@@ -38,5 +49,21 @@ public class Operations {
 		return list;
 	}
 
+
+	public static void insertIntoStaticArray(int size) {
+		Integer[] array = new Integer[size];
+		for (int i = 0; i < size; i++)
+			array[i] = rand.nextInt();
+	}
+
+	public static void insertIntoStaticArrayLambdaStyle(int size) {
+		stream(new Integer[size]).forEach(i -> i = rand.nextInt());
+	}
+
+	public static void insertIntoArrayList(int size) {
+		ArrayList<Integer> arrayList = new ArrayList<>();
+		for (int i = 0; i < size; i++)
+			arrayList.add(i);
+	}
 
 }
