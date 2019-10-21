@@ -40,13 +40,19 @@ public class Operations {
 		return list;
 	}
 
-	public static Integer[] getRandomIntegerList(int size) {
+	public static Integer[] getRandomIntegerArray(int size) {
 		Integer[] list = new Integer[size];
 		for (int i = 0; i < size; i++)
 			list[i] = rand.nextInt();
 		return list;
 	}
 
+	public static ArrayList<Integer> getRandomIntegerArrayList(int size) {
+		ArrayList<Integer> integers = new ArrayList<>(size);
+		for (int i = 0; i < size; i++)
+			integers.add(rand.nextInt());
+		return integers;
+	}
 
 	public static void insertIntoStaticArray(int size) {
 		Integer[] array = new Integer[size];
@@ -59,9 +65,14 @@ public class Operations {
 	}
 
 	public static void insertIntoArrayList(int size) {
-		ArrayList<Integer> arrayList = new ArrayList<>();
+		ArrayList<Integer> arrayList = new ArrayList<>(size);
 		for (int i = 0; i < size; i++)
-			arrayList.add(i);
+			arrayList.add(rand.nextInt());
+}
+
+	public static <T> void deleteFromArrayList(ArrayList<T> list) {
+		for (int i = 0; i < list.size(); i++)
+			list.remove(i);
 	}
 
 }

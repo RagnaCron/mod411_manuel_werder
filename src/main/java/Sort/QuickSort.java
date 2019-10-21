@@ -1,5 +1,6 @@
 package Sort;
 
+@SuppressWarnings("all")
 public class QuickSort<T extends Comparable<T>> implements Sort<T> {
 
 	private void medianOfThree(T[] list, int leftSide, int rightSide) {
@@ -17,7 +18,7 @@ public class QuickSort<T extends Comparable<T>> implements Sort<T> {
 	}
 
 //	Version 4 http://www.linux-related.de/index.html?coding/sort/sort_quick.htm
-//	Fastest version!
+//	Fastest version, so far!
 	private void quickSort(T[] list, int leftSide, int rightSide) {
 		if (rightSide > leftSide){
 			int i = leftSide - 1;

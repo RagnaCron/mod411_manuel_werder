@@ -11,7 +11,7 @@ public class SortingMain {
 	public static void main(String[] args) {
 		ArrayList<String> messageList = new ArrayList<>();
 
-		Integer[] bubbleSortIntegerList = Operations.getRandomIntegerList(Operations.THOUSAND);
+		Integer[] bubbleSortIntegerList = Operations.getRandomIntegerArray(Operations.THOUSAND);
 		messageList.add("BubbleSort on integers, runtime: " +
 			Measurement.measureRuntime(list -> new BubbleSort<Integer>().sort(list), bubbleSortIntegerList));
 
@@ -19,7 +19,7 @@ public class SortingMain {
 		messageList.add("BubbleSort on strings, runtime: " +
 			Measurement.measureRuntime(list -> new BubbleSort<String>().sort(list), bubbleSortStringList));
 
-		Integer[] insertionSortIntegerList = Operations.getRandomIntegerList(Operations.THOUSAND);
+		Integer[] insertionSortIntegerList = Operations.getRandomIntegerArray(Operations.THOUSAND);
 		messageList.add("InsertionSort on integers, runtime: " +
 			Measurement.measureRuntime(list ->  new InsertionSort<Integer>().sort(list), insertionSortIntegerList));
 
@@ -27,7 +27,7 @@ public class SortingMain {
 		messageList.add("InsertionSort on strings, runtime: " +
 			Measurement.measureRuntime(list -> new InsertionSort<String>().sort(list), insertionSortStringList));
 
-		Integer[] quickSortIntegerList = Operations.getRandomIntegerList(Operations.TEN_THOUSAND);
+		Integer[] quickSortIntegerList = Operations.getRandomIntegerArray(Operations.TEN_THOUSAND);
 		messageList.add("QuickSort on integers, runtime: " +
 			Measurement.measureRuntime(list ->  new QuickSort<Integer>().sort(list), quickSortIntegerList));
 
