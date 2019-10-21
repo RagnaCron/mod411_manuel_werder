@@ -41,22 +41,29 @@ public class Operations {
 	}
 
 	public static Integer[] getRandomIntegerArray(int size) {
-		Integer[] list = new Integer[size];
+		Integer[] list = createIntegerArray(size);
 		for (int i = 0; i < size; i++)
 			list[i] = rand.nextInt();
 		return list;
 	}
 
 	public static ArrayList<Integer> getRandomIntegerArrayList(int size) {
-		ArrayList<Integer> integers = new ArrayList<>(size);
+		ArrayList<Integer> integers = createIntegerArrayList(size);
 		for (int i = 0; i < size; i++)
 			integers.add(rand.nextInt());
 		return integers;
 	}
 
-	public static void insertIntoStaticArray(int size) {
-		Integer[] array = new Integer[size];
-		for (int i = 0; i < size; i++)
+	public static Integer[] createIntegerArray(int size) {
+		return new Integer[size];
+	}
+
+	public static ArrayList<Integer> createIntegerArrayList(int size) {
+		return new ArrayList<>(size);
+	}
+
+	public static void insertIntoStaticArray(Integer[] array) {
+		for (int i = 0; i < array.length; i++)
 			array[i] = rand.nextInt();
 	}
 
@@ -68,7 +75,7 @@ public class Operations {
 		ArrayList<Integer> arrayList = new ArrayList<>(size);
 		for (int i = 0; i < size; i++)
 			arrayList.add(rand.nextInt());
-}
+	}
 
 	public static <T> void deleteFromArrayList(ArrayList<T> list) {
 		for (int i = 0; i < list.size(); i++)
