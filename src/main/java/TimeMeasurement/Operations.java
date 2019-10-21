@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import static java.util.Arrays.*;
-
 @SuppressWarnings("all")
 public class Operations {
 
@@ -57,7 +55,7 @@ public class Operations {
 	}
 
 	public static void insertIntoStaticArrayLambdaStyle(int size) {
-		stream(new Integer[size]).forEach(i -> i = rand.nextInt());
+		Arrays.stream(new Integer[size]).forEach(i -> i = rand.nextInt());
 	}
 
 	public static void insertIntoArrayList(int size) {
