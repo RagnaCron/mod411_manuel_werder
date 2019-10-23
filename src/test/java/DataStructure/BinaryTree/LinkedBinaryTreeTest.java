@@ -66,27 +66,40 @@ class LinkedBinaryTreeTest {
 	}
 
 	@Test
+	void makeDefaultTree() {
+		tree.makeDefaultTree();
+		assertEquals("A", tree.getRootNodeData());
+		assertEquals("B", tree.getRootNode().getLeftNode().getData());
+		assertEquals("D", tree.getRootNode().getLeftNode().getLeftNode().getData());
+		assertEquals("E", tree.getRootNode().getLeftNode().getRightNode().getData());
+		assertEquals("C", tree.getRootNode().getRightNode().getData());
+		assertEquals("F", tree.getRootNode().getRightNode().getLeftNode().getData());
+		assertEquals("G", tree.getRootNode().getRightNode().getRightNode().getData());
+	}
+
+	@Test
 	void traverseInOrder() {
-		tree.makeTree("Root", new BinaryTreeNode<>("Left"), new BinaryTreeNode<>("Right"));
+		tree.makeDefaultTree();
 		assertDoesNotThrow(() -> tree.traverse(LinkedBinaryTree.IN_ORDER));
 	}
 
 	@Test
 	void traversePreOrder() {
-		tree.makeTree("Root", new BinaryTreeNode<>("Left"), new BinaryTreeNode<>("Right"));
+		tree.makeDefaultTree();
 		assertDoesNotThrow(() -> tree.traverse(LinkedBinaryTree.PRE_ORDER));
 	}
 
 	@Test
 	void traversePostOrder() {
-		tree.makeTree("Root", new BinaryTreeNode<>("Left"), new BinaryTreeNode<>("Right"));
+		tree.makeDefaultTree();
 		assertDoesNotThrow(() -> tree.traverse(LinkedBinaryTree.POST_ORDER));
 	}
 
 	@Test
 	void traverseLevelOrder() {
-		tree.makeTree("Root", new BinaryTreeNode<>("Left"), new BinaryTreeNode<>("Right"));
+		tree.makeDefaultTree();
 		assertDoesNotThrow(() -> tree.traverse(LinkedBinaryTree.LEVEL_ORDER));
 	}
+
 
 }
