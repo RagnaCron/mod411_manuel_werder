@@ -11,8 +11,8 @@ public class ArrayQueue<T> implements Queue<T> {
 	}
 
 	public ArrayQueue(int capacity) {
-		if (capacity < 1)
-			throw new IllegalArgumentException("Capacity must be >= 1");
+		if (capacity < 2)
+			throw new IllegalArgumentException("Capacity must be >= 2");
 		queue = (T[]) new Object[capacity];
 		front = 0;
 		rear = 0;
@@ -20,7 +20,8 @@ public class ArrayQueue<T> implements Queue<T> {
 
 	@Override
 	public void put(T payload) {
-		queue[rear++] = payload;
+		queue[rear] = payload;
+		rear = queue.length - 1 == rear ? rear % (queue.length - 1) : rear + 1;
 	}
 
 	@Override
@@ -30,7 +31,9 @@ public class ArrayQueue<T> implements Queue<T> {
 
 	@Override
 	public T remove() {
-		return null;
+		T item =  queue[front];
+		front = queue.length - 1 == front ? front % (queue.length - 1) : front + 1;
+		return item;
 	}
 
 	@Override
@@ -40,6 +43,6 @@ public class ArrayQueue<T> implements Queue<T> {
 
 	@Override
 	public T getRearElement() {
-		return null;
+		return queue[Math.abs(rear - 1)];
 	}
 }
