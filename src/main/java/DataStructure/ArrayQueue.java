@@ -11,17 +11,33 @@ public class ArrayQueue<T> implements Queue<T> {
 	}
 
 	public ArrayQueue(int capacity) {
-		if (capacity < 2)
-			throw new IllegalArgumentException("Capacity must be >= 2");
+		if (capacity < 1)
+			throw new IllegalArgumentException("Capacity must be >= 1");
 		queue = (T[]) new Object[capacity];
-		front = 0;
-		rear = 0;
 	}
 
 	@Override
 	public void put(T payload) {
+		if ((rear + 1) % queue.length == front) {
+			T[] newQueue = (T[]) new Object[queue.length * 2];
+			int start = (front + 1 ) % queue.length;
+			if (start < 2) {
+				System.arraycopy(queue, start, newQueue, 0, queue.length - 1);
+			} else {
+				System.arraycopy(queue, start, newQueue, 0, queue.length - start);
+				System.arraycopy(queue, 0, newQueue, queue.length - start, rear + 1);
+			}
+			front = newQueue.length - 1;
+			rear = queue.length - 2;
+			queue = newQueue;
+		}
+		rear = (rear + 1) % queue.length;
 		queue[rear] = payload;
-		rear = queue.length - 1 == rear ? rear % (queue.length - 1) : rear + 1;
+	}
+
+	@Override
+	public int size() {
+		return Math.abs(rear - front);
 	}
 
 	@Override
@@ -31,18 +47,18 @@ public class ArrayQueue<T> implements Queue<T> {
 
 	@Override
 	public T remove() {
-		T item =  queue[front];
-		front = queue.length - 1 == front ? front % (queue.length - 1) : front + 1;
+		T item = queue[(front + 1) % queue.length];
+		front = (front + 1) % queue.length;
 		return item;
 	}
 
 	@Override
 	public T getFrontElement() {
-		return queue[front];
+		return isEmpty() ? null : queue[(front + 1) % queue.length];
 	}
 
 	@Override
 	public T getRearElement() {
-		return queue[Math.abs(rear - 1)];
+		return isEmpty() ? null : queue[rear % queue.length];
 	}
 }

@@ -12,7 +12,7 @@ class ArrayQueueTest {
 
 	@BeforeEach
 	void setUp() {
-		queue = new ArrayQueue<>(2);
+		queue = new ArrayQueue<>(1);
 	}
 
 	@Test
@@ -24,6 +24,8 @@ class ArrayQueueTest {
 	void put() {
 		queue.put("Hello");
 		assertFalse(queue.isEmpty());
+		queue.put("world");
+		queue.put("yes");
 	}
 
 	@Test
@@ -34,23 +36,22 @@ class ArrayQueueTest {
 	@Test
 	void remove() {
 		queue.put("Hello");
-		String hello = queue.remove();
-		assertEquals("Hello", hello);
+		assertEquals("Hello", queue.remove());
 		assertTrue(queue.isEmpty());
 	}
 
 	@Test
 	void getFrontElement() {
+		assertNull(queue.getFrontElement());
 		queue.put("Hello");
-		String hello = queue.getFrontElement();
-		assertEquals("Hello", hello);
+		assertEquals("Hello", queue.getFrontElement());
 	}
 
 	@Test
 	void getRearElement() {
+		assertNull(queue.getRearElement());
 		queue.put("Hello");
-		String hello = queue.getRearElement();
-		assertEquals("Hello", hello);
+		assertEquals("Hello", queue.getRearElement());
 	}
 
 	@Test
@@ -62,9 +63,16 @@ class ArrayQueueTest {
 		assertEquals("Hello", queue.remove());
 		assertEquals("world", queue.remove());
 		assertTrue(queue.isEmpty());
-		queue.put("Hello");
-		assertFalse(queue.isEmpty());
-		
+		assertNull(queue.getFrontElement());
+		assertNull(queue.getRearElement());
 	}
 
+	@Test
+	void size() {
+		assertEquals(0, queue.size());
+		queue.put("Hello");
+		assertEquals(1, queue.size());
+		queue.remove();
+		assertEquals(0, queue.size());
+	}
 }

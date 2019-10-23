@@ -2,6 +2,8 @@ package DataStructure;
 
 public interface Queue<T> {
 
+	public int size();
+
 	public void put(T payload);
 
 	public boolean isEmpty();
