@@ -33,7 +33,7 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void makeDefaultTree() {
+	public void makeDefaultAlphabetTree() {
 		this.makeTree(
 				(T) "A",
 				new BinaryTreeNode<>("B",

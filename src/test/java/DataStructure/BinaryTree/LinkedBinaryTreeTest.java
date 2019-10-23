@@ -66,8 +66,8 @@ class LinkedBinaryTreeTest {
 	}
 
 	@Test
-	void makeDefaultTree() {
-		tree.makeDefaultTree();
+	void makeDefaultAlphabetTree() {
+		tree.makeDefaultAlphabetTree();
 		assertEquals("A", tree.getRootNodeData());
 		assertEquals("B", tree.getRootNode().getLeftNode().getData());
 		assertEquals("D", tree.getRootNode().getLeftNode().getLeftNode().getData());
@@ -79,25 +79,25 @@ class LinkedBinaryTreeTest {
 
 	@Test
 	void traverseInOrder() {
-		tree.makeDefaultTree();
+		tree.makeDefaultAlphabetTree();
 		assertDoesNotThrow(() -> tree.traverse(LinkedBinaryTree.IN_ORDER));
 	}
 
 	@Test
 	void traversePreOrder() {
-		tree.makeDefaultTree();
+		tree.makeDefaultAlphabetTree();
 		assertDoesNotThrow(() -> tree.traverse(LinkedBinaryTree.PRE_ORDER));
 	}
 
 	@Test
 	void traversePostOrder() {
-		tree.makeDefaultTree();
+		tree.makeDefaultAlphabetTree();
 		assertDoesNotThrow(() -> tree.traverse(LinkedBinaryTree.POST_ORDER));
 	}
 
 	@Test
 	void traverseLevelOrder() {
-		tree.makeDefaultTree();
+		tree.makeDefaultAlphabetTree();
 		assertDoesNotThrow(() -> tree.traverse(LinkedBinaryTree.LEVEL_ORDER));
 	}
 
