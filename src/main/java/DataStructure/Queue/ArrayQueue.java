@@ -47,8 +47,11 @@ public class ArrayQueue<T> implements Queue<T> {
 
 	@Override
 	public T remove() {
-		T item = queue[(front + 1) % queue.length];
+		if (isEmpty()) return null;
+
 		front = (front + 1) % queue.length;
+		T item = queue[front];
+		queue[front] = null;
 		return item;
 	}
 

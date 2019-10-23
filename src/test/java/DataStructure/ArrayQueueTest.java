@@ -38,6 +38,7 @@ class ArrayQueueTest {
 		queue.put("Hello");
 		assertEquals("Hello", queue.remove());
 		assertTrue(queue.isEmpty());
+		assertNull(queue.remove());
 	}
 
 	@Test
