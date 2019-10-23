@@ -30,7 +30,7 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 	@Override
 	public void makeTree(T data, BinaryTreeNode leftNode, BinaryTreeNode rightNode) {
 		this.rootNode = new BinaryTreeNode<>(data, leftNode, rightNode);
-}
+	}
 
 	@SuppressWarnings("unchecked")
 	public void makeDefaultTree() {
