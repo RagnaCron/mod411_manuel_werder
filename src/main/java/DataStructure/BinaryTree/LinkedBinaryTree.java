@@ -5,10 +5,10 @@ import DataStructure.Queue.ArrayQueue;
 
 public class LinkedBinaryTree<T> implements BinaryTree<T> {
 
-	public static final int IN_ORDER = 1;
-	public static final int PRE_ORDER = 2;
-	public static final int POST_ORDER = 3;
-	public static final int LEVEL_ORDER = 4;
+	static final int IN_ORDER = 1;
+	static final int PRE_ORDER = 2;
+	static final int POST_ORDER = 3;
+	static final int LEVEL_ORDER = 4;
 
 	private BinaryTreeNode<T> rootNode;
 
