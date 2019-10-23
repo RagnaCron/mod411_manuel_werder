@@ -10,7 +10,7 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 	public static final int POST_ORDER = 3;
 	public static final int LEVEL_ORDER = 4;
 
-	private BinaryTreeNode rootNode;
+	private BinaryTreeNode<T> rootNode;
 
 	@Override
 	public boolean isEmpty() {
@@ -18,33 +18,18 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 	}
 
 	@Override
-	public T getRootNode() {
-		return isEmpty() ? null : (T) rootNode.getPayload();
+	public BinaryTreeNode getRootNode() {
+		return isEmpty() ? null : rootNode;
+	}
+
+	@Override
+	public T getRootNodeData() {
+		return isEmpty() ? null : rootNode.getData();
 	}
 
 	@Override
 	public void makeTree(T data, BinaryTreeNode leftNode, BinaryTreeNode rightNode) {
-		this.rootNode = new BinaryTreeNode(data, leftNode, rightNode);
-	}
-
-	@Override
-	public void setLeftNode(BinaryTreeNode<T> leftNode) {
-		rootNode.setLeftNode(leftNode);
-	}
-
-	@Override
-	public void setRightNode(BinaryTreeNode<T> rightNode) {
-		rootNode.setRightNode(rightNode);
-	}
-
-	@Override
-	public BinaryTreeNode getLeftNode() {
-		return rootNode.getLeftNode();
-	}
-
-	@Override
-	public BinaryTreeNode getRightNode() {
-		return rootNode.getRightNode();
+		this.rootNode = new BinaryTreeNode<>(data, leftNode, rightNode);
 	}
 
 	@Override
