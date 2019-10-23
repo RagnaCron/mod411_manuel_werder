@@ -1,4 +1,4 @@
-package DataStructure;
+package DataStructure.Queue;
 
 import DataStructure.Queue.ArrayQueue;
 import org.junit.jupiter.api.BeforeEach;
