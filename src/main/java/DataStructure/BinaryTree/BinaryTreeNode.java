@@ -5,23 +5,23 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BinaryTreeNode {
+public class BinaryTreeNode<T> {
 
-	private Object payload;
-	private BinaryTreeNode left, right;
+	private T payload;
+	private BinaryTreeNode leftNode, rightNode;
 
 	public BinaryTreeNode() {
 		this(null);
 	}
 
-	public BinaryTreeNode(Object payload) {
+	public BinaryTreeNode(T payload) {
 		this(payload, null, null);
 	}
 
-	public  BinaryTreeNode(Object payload, BinaryTreeNode left, BinaryTreeNode right) {
+	public  BinaryTreeNode(T payload, BinaryTreeNode leftNode, BinaryTreeNode rightNode) {
 		this.payload = payload;
-		this.left = left;
-		this.right = right;
+		this.leftNode = leftNode;
+		this.rightNode = rightNode;
 	}
 
 	@Override
