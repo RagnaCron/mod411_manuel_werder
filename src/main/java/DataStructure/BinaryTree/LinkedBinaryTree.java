@@ -88,14 +88,14 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 	private void printInOrder(BinaryTreeNode node) {
 		if (node != null) {
 			printInOrder(node.getLeftNode());
-			System.out.println(node.toString());
+			System.out.print(node.toString() + " ");
 			printInOrder(node.getRightNode());
 		}
 	}
 
 	private void printPreOrder(BinaryTreeNode node) {
 		if (node != null) {
-			System.out.println(node.toString());
+			System.out.print(node.toString() + " ");
 			printPreOrder(node.getLeftNode());
 			printPreOrder(node.getRightNode());
 		}
@@ -105,7 +105,7 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 		if (node != null) {
 			printPostOrder(node.getLeftNode());
 			printPostOrder(node.getRightNode());
-			System.out.println(node.toString());
+			System.out.print(node.toString() + " ");
 		}
 	}
 
@@ -116,7 +116,7 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 				queue.put(node.getLeftNode());
 			if (node.getRightNode() != null)
 				queue.put(node.getRightNode());
-			System.out.println(node.toString());
+			System.out.print(node.toString() + " ");
 		}
 	}
 

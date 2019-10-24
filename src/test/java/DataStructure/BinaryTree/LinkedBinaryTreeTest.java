@@ -1,7 +1,11 @@
 package DataStructure.BinaryTree;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,9 +13,24 @@ class LinkedBinaryTreeTest {
 
 	private LinkedBinaryTree<String> tree;
 
+	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	private final PrintStream originalOut = System.out;
+
 	@BeforeEach
 	void setUp() {
 		tree = new LinkedBinaryTree<>();
+
+		System.setOut(new PrintStream(outContent));
+	}
+
+	@BeforeEach
+	void setUpStreams() {
+		System.setOut(new PrintStream(outContent));
+	}
+
+	@AfterEach
+	void restoreStreams() {
+		System.setOut(originalOut);
 	}
 
 	@Test
@@ -92,25 +111,33 @@ class LinkedBinaryTreeTest {
 	@Test
 	void traverseInOrder() {
 		tree.makeDefaultAlphabetTree();
-		assertDoesNotThrow(() -> tree.traverse(TraverseOrder.IN_ORDER));
+		String expected = "D B E A F C G ";
+		tree.traverse(TraverseOrder.IN_ORDER);
+		assertEquals(expected, outContent.toString());
 	}
 
 	@Test
 	void traversePreOrder() {
 		tree.makeDefaultAlphabetTree();
-		assertDoesNotThrow(() -> tree.traverse(TraverseOrder.PRE_ORDER));
+		String expected = "A B D E C F G ";
+		tree.traverse(TraverseOrder.PRE_ORDER);
+		assertEquals(expected, outContent.toString());
 	}
 
 	@Test
 	void traversePostOrder() {
 		tree.makeDefaultAlphabetTree();
-		assertDoesNotThrow(() -> tree.traverse(TraverseOrder.POST_ORDER));
+		String expected = "D E B F G C A ";
+		tree.traverse(TraverseOrder.POST_ORDER);
+		assertEquals(expected, outContent.toString());
 	}
 
 	@Test
 	void traverseLevelOrder() {
 		tree.makeDefaultAlphabetTree();
-		assertDoesNotThrow(() -> tree.traverse(TraverseOrder.LEVEL_ORDER));
+		String expected = "A B C D E F G ";
+		tree.traverse(TraverseOrder.LEVEL_ORDER);
+		assertEquals(expected, outContent.toString());
 	}
 
 }
