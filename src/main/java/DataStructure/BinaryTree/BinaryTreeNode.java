@@ -3,6 +3,7 @@ package DataStructure.BinaryTree;
 import lombok.Getter;
 import lombok.Setter;
 
+@SuppressWarnings("all")
 @Getter
 @Setter
 public class BinaryTreeNode<T extends Comparable<T>> {
@@ -30,7 +31,7 @@ public class BinaryTreeNode<T extends Comparable<T>> {
 	}
 
 	int compareDataTo(Comparable c) {
-		return (data == null ? -1 : ((Comparable) data).compareTo(c));
+		return data == null ? -1 : ((Comparable) data).compareTo(c);
 	}
 
 }

@@ -13,6 +13,7 @@ class LinkedBinaryTreeTest {
 
 	private LinkedBinaryTree<String> tree;
 	private final String[] array = {"A", "B", "C", "D", "E", "F", "G"};
+	private String[] sortedArray;
 
 
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -81,9 +82,28 @@ class LinkedBinaryTreeTest {
 	}
 
 	@Test
+	void insert() {
+		assertTrue(tree.isEmpty());
+		assertTrue(tree.insert("D"));
+		assertFalse(tree.isEmpty());
+		assertTrue(tree.insert("F"));
+		assertTrue(tree.insert("B"));
+		assertEquals("F", tree.getRootNode().getRightNode().getData());
+		assertEquals("B", tree.getRootNode().getLeftNode().getData());
+		assertTrue(tree.insert("A"));
+		assertEquals("A", tree.getRootNode().getLeftNode().getLeftNode().getData());
+		assertTrue(tree.insert("C"));
+		assertEquals("C", tree.getRootNode().getLeftNode().getRightNode().getData());
+		assertTrue(tree.insert("G"));
+		assertEquals("G", tree.getRootNode().getRightNode().getRightNode().getData());
+		assertTrue(tree.insert("E"));
+		assertEquals("E", tree.getRootNode().getRightNode().getLeftNode().getData());
+	}
+
+	@Test
 	void findNode() {
-		String[] arr = {"B", "A", "C"};
-		tree.buildTreeFromArray(arr);
+		sortedArray = new String[]{"B", "A", "C"};
+		tree.buildTreeFromArray(sortedArray);
 		assertEquals("A", tree.findNode("A").getData());
 	}
 
@@ -198,4 +218,5 @@ class LinkedBinaryTreeTest {
 		tree.traverse(TraverseOrder.LEVEL_ORDER);
 		assertEquals("A B E C D F G ", outContent.toString());
 	}
+
 }

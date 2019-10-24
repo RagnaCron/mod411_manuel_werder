@@ -52,6 +52,33 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 	}
 
 	@Override
+	public boolean insert(Comparable data) {
+		if (isEmpty()) {
+			rootNode = new BinaryTreeNode(data);
+			return true;
+		}
+		BinaryTreeNode parent = null;
+		BinaryTreeNode child = rootNode;
+		while (child != null) {
+			parent = child;
+			int cmp = child.compareDataTo((T)data);
+			if (cmp == 0)
+				return false;
+			else
+				child = (cmp > 0 ? child.getLeftNode() : child.getRightNode());
+		}
+		BinaryTreeNode<T> node = new BinaryTreeNode<>((T) data);
+		assert parent != null;
+		if (parent.compareDataTo(data) > 0)
+			parent.setLeftNode(node);
+		else
+			parent.setRightNode(node);
+		node.setLeftNode(null);
+		node.setRightNode(null);
+		return true;
+	}
+
+	@Override
 	public boolean find(T data) {
 		return (findNode(data) != null);
 	}
@@ -73,6 +100,7 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 	}
 
 	private static int position = 0;
+
 	@Override
 	public void buildTreeFromArray(T[] array) {
 		if (isEmpty()) {
@@ -81,11 +109,11 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 		}
 	}
 
-	private BinaryTreeNode buildArray(T[] array, int size) {
+	private BinaryTreeNode<T> buildArray(T[] array, int size) {
 		if (array == null || size == 0) return null;
 		int sizeLeft = size / 2;
 		int sizeRight = size - sizeLeft - 1;
-		BinaryTreeNode newNode = new BinaryTreeNode<T>(array[position++]);
+		BinaryTreeNode<T> newNode = new BinaryTreeNode<>(array[position++]);
 		newNode.setLeftNode(buildArray(array, sizeLeft));
 		newNode.setRightNode(buildArray(array, sizeRight));
 		return newNode;
