@@ -3,7 +3,7 @@ package DataStructure.BinaryTree;
 
 import DataStructure.Queue.ArrayQueue;
 
-public class LinkedBinaryTree<T> implements BinaryTree<T> {
+public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> {
 
 	private BinaryTreeNode<T> rootNode;
 

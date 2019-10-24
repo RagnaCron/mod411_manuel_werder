@@ -1,6 +1,6 @@
 package DataStructure.BinaryTree;
 
-public interface BinaryTree<T> {
+public interface BinaryTree<T extends Comparable<T>> {
 	boolean isEmpty();
 	BinaryTreeNode getRootNode();
 	T getRootNodeData();
