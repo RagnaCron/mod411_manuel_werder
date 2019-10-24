@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class LinkedBinaryTreeTest {
 
 	private LinkedBinaryTree<String> tree;
+	private final String[] array = {"A", "B", "C", "D", "E", "F", "G"};
+
 
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	private final PrintStream originalOut = System.out;
@@ -72,6 +74,9 @@ class LinkedBinaryTreeTest {
 	@Test
 	void maxTreeDepth() {
 		tree.makeDefaultAlphabetTree();
+		assertEquals(3, tree.maxTreeDepth());
+		tree.deleteTree();
+		tree.buildTreeFromArray(array);
 		assertEquals(3, tree.maxTreeDepth());
 	}
 
@@ -162,9 +167,34 @@ class LinkedBinaryTreeTest {
 	}
 
 	@Test
-	void buildTreeFromArray() {
-		String[] array = {"A", "B", "C"};
+	void buildTreeFromArrayInOrderCheck() {
 		tree.buildTreeFromArray(array);
 		assertFalse(tree.isEmpty());
+		tree.traverse(TraverseOrder.IN_ORDER);
+		assertEquals("C B D A F E G ", outContent.toString());
+	}
+
+	@Test
+	void buildTreeFromArrayPreOrderCheck() {
+		tree.buildTreeFromArray(array);
+		assertFalse(tree.isEmpty());
+		tree.traverse(TraverseOrder.PRE_ORDER);
+		assertEquals("A B C D E F G ", outContent.toString());
+	}
+
+	@Test
+	void buildTreeFromArrayPostOrderCheck() {
+		tree.buildTreeFromArray(array);
+		assertFalse(tree.isEmpty());
+		tree.traverse(TraverseOrder.POST_ORDER);
+		assertEquals("C D B F G E A ", outContent.toString());
+	}
+
+	@Test
+	void buildTreeFromArrayLevelOrderCheck() {
+		tree.buildTreeFromArray(array);
+		assertFalse(tree.isEmpty());
+		tree.traverse(TraverseOrder.LEVEL_ORDER);
+		assertEquals("A B E C D F G ", outContent.toString());
 	}
 }

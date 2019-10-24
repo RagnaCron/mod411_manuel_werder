@@ -5,7 +5,7 @@ import DataStructure.Queue.ArrayQueue;
 
 public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> {
 
-	private BinaryTreeNode rootNode;
+	private BinaryTreeNode<T> rootNode;
 
 	@Override
 	public void deleteTree() {
