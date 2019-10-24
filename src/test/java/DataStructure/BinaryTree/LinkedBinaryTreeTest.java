@@ -36,6 +36,18 @@ class LinkedBinaryTreeTest {
 	}
 
 	@Test
+	void nodeCount() {
+		tree.makeDefaultAlphabetTree();
+		assertEquals(7, tree.nodeCount());
+	}
+
+	@Test
+	void maxTreeDepth() {
+		tree.makeDefaultAlphabetTree();
+		assertEquals(3, tree.maxTreeDepth());
+	}
+
+	@Test
 	void setRootNodeLeftNode() {
 		assertNull(tree.getRootNode());
 		tree.makeTree("Root", null, null);
@@ -100,6 +112,5 @@ class LinkedBinaryTreeTest {
 		tree.makeDefaultAlphabetTree();
 		assertDoesNotThrow(() -> tree.traverse(LinkedBinaryTree.LEVEL_ORDER));
 	}
-
 
 }

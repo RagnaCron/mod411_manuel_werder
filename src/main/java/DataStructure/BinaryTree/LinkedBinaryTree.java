@@ -28,12 +28,36 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 	}
 
 	@Override
+	public int nodeCount() {
+		if (isEmpty()) return 0;
+		return count(rootNode);
+	}
+
+	private int count(BinaryTreeNode node) {
+		if (node == null) return 0;
+		return 1 + count(node.getLeftNode()) + count(node.getRightNode());
+	}
+
+	@Override
+	public int maxTreeDepth() {
+		if (isEmpty()) return 0;
+		return depth(rootNode);
+	}
+
+	private int depth(BinaryTreeNode node) {
+		if (node == null) return 0;
+		int leftHeight = depth(node.getLeftNode());
+		int rightHeight = depth(node.getRightNode());
+		return (leftHeight > rightHeight) ? leftHeight + 1 : rightHeight + 1;
+	}
+
+	@Override
 	public void makeTree(T data, BinaryTreeNode leftNode, BinaryTreeNode rightNode) {
 		this.rootNode = new BinaryTreeNode<>(data, leftNode, rightNode);
 	}
 
 	@SuppressWarnings("unchecked")
-	public void makeDefaultAlphabetTree() {
+	void makeDefaultAlphabetTree() {
 		this.makeTree(
 				(T) "A",
 				new BinaryTreeNode<>("B",
