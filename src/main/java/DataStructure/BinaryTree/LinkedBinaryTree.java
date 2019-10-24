@@ -61,7 +61,7 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 		BinaryTreeNode child = rootNode;
 		while (child != null) {
 			parent = child;
-			int cmp = child.compareDataTo((T)data);
+			int cmp = child.compareDataTo((T) data);
 			if (cmp == 0)
 				return false;
 			else
@@ -77,6 +77,54 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 		node.setRightNode(null);
 		return true;
 	}
+
+	@Override
+	public boolean remove(Comparable data) {
+		if (isEmpty()) return false;
+		BinaryTreeNode parent = rootNode;
+		BinaryTreeNode node = rootNode;
+		BinaryTreeNode child = null;
+		BinaryTreeNode tmp = null;
+		// zu löschenden Knoten suchen
+		while (node != null) {
+			int cmp = node.compareDataTo(data);
+			if (cmp == 0)
+				break;
+			else {
+				parent = node;
+				node = (cmp > 0 ? node.getLeftNode() : node.getRightNode());
+			}
+		}
+		if (node == null) // Kein Knoten gefunden
+			return false;
+			// Fall 1
+			if (node.isLeftNodeNull() && node.isRightNodeNull())
+				child = null; // Fall 2
+			else if (node.isLeftNodeNull())
+				child = node.getRightNode();
+			else if (node.isRightNodeNull())
+				child = node.getLeftNode();
+			else { // Fall 3
+				// minimales Element suchen
+				child = node.getRightNode();
+				tmp = node;
+				while (!child.isLeftNodeNull()) {
+					tmp = child;
+					child = child.getLeftNode();
+				}
+				child.setLeftNode(node.getLeftNode());
+				if (tmp != node) {
+					tmp.setLeftNode(child.getRightNode());
+					child.setRightNode(node.getRightNode());
+				}
+			}
+		if (parent.getLeftNode() == node)
+			parent.setLeftNode(child);
+		else
+			parent.setRightNode(child);
+		return true;
+	}
+
 
 	@Override
 	public boolean find(T data) {
@@ -180,9 +228,9 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 	private void printLevelOrder(ArrayQueue<BinaryTreeNode> queue) {
 		while (!queue.isEmpty()) {
 			BinaryTreeNode node = queue.remove();
-			if (node.getLeftNode() != null)
+			if (!node.isLeftNodeNull())
 				queue.put(node.getLeftNode());
-			if (node.getRightNode() != null)
+			if (!node.isRightNodeNull())
 				queue.put(node.getRightNode());
 			System.out.print(node.toString() + " ");
 		}

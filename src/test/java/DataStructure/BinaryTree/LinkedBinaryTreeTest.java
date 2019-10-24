@@ -82,6 +82,21 @@ class LinkedBinaryTreeTest {
 	}
 
 	@Test
+	void remove() {
+		assertTrue(tree.insert("D"));
+		assertTrue(tree.insert("F"));
+		assertTrue(tree.insert("B"));
+		assertTrue(tree.insert("A"));
+		assertTrue(tree.insert("C"));
+		assertTrue(tree.insert("G"));
+		assertTrue(tree.insert("E"));
+
+		assertTrue(tree.remove("F"));
+		assertEquals("G", tree.getRootNode().getRightNode().getData());
+		assertEquals("E", tree.getRootNode().getRightNode().getLeftNode().getData());
+	}
+
+	@Test
 	void insert() {
 		assertTrue(tree.isEmpty());
 		assertTrue(tree.insert("D"));
@@ -218,5 +233,6 @@ class LinkedBinaryTreeTest {
 		tree.traverse(TraverseOrder.LEVEL_ORDER);
 		assertEquals("A B E C D F G ", outContent.toString());
 	}
+
 
 }

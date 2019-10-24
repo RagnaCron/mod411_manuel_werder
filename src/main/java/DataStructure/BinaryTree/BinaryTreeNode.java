@@ -25,6 +25,14 @@ public class BinaryTreeNode<T extends Comparable<T>> {
 		this.rightNode = rightNode;
 	}
 
+	public boolean isLeftNodeNull() {
+		return leftNode == null;
+	}
+
+	public boolean isRightNodeNull() {
+		return rightNode == null;
+	}
+
 	@Override
 	public String toString() {
 		return data.toString();

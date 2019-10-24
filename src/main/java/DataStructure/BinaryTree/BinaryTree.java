@@ -11,7 +11,8 @@ public interface BinaryTree<T> {
 	int nodeCount();
 	int maxTreeDepth();
 
-	boolean insert(Comparable<T> data);
+	boolean insert(Comparable data);
+	boolean remove(Comparable data);
 
 //	void searchAndInsert(BinaryTreeNode node, T Data);
 	boolean find(T value);
