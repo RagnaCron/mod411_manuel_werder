@@ -5,11 +5,6 @@ import DataStructure.Queue.ArrayQueue;
 
 public class LinkedBinaryTree<T> implements BinaryTree<T> {
 
-	static final int IN_ORDER = 1;
-	static final int PRE_ORDER = 2;
-	static final int POST_ORDER = 3;
-	static final int LEVEL_ORDER = 4;
-
 	private BinaryTreeNode<T> rootNode;
 
 	@Override
@@ -70,7 +65,7 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 	}
 
 	@Override
-	public void traverse(int strategy) {
+	public void traverse(TraverseOrder strategy) {
 		switch (strategy) {
 			case IN_ORDER:
 				printInOrder(rootNode);

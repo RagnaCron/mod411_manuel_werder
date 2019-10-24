@@ -5,7 +5,7 @@ public interface BinaryTree<T> {
 	BinaryTreeNode getRootNode();
 	T getRootNodeData();
 	void makeTree(T data, BinaryTreeNode leftNode, BinaryTreeNode rightNode);
-	void traverse(int strategy);
+	void traverse(TraverseOrder strategy);
 	int nodeCount();
 	int maxTreeDepth();
 }
