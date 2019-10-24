@@ -22,8 +22,7 @@ public class GameOfLife {
         boolean[][] world = new boolean[DIM1][DIM2];
         for (int x = 0; x < DIM1; x++)
             for (int y = 0; y < DIM2; y++)
-                if (rand.nextInt(200000) % 2 == 0)
-                    world[x][y] = true;
+                world[x][y] = rand.nextBoolean();
         return world;
     }
 
