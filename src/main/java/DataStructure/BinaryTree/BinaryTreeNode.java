@@ -2,11 +2,10 @@ package DataStructure.BinaryTree;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
 
 @Getter
 @Setter
-public class BinaryTreeNode<T extends Comparable<T>> implements Comparable<T> {
+public class BinaryTreeNode<T extends Comparable<T>> {
 
 	private T data;
 	private BinaryTreeNode leftNode, rightNode;
@@ -30,8 +29,8 @@ public class BinaryTreeNode<T extends Comparable<T>> implements Comparable<T> {
 		return data.toString();
 	}
 
-	@Override
-	public int compareTo(@NotNull T t) {
-		return 0;
+	public int compareDataTo(Comparable c) {
+		return (data == null ? -1 : ((Comparable) data).compareTo(c));
 	}
+
 }

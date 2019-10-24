@@ -58,37 +58,14 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 
 	@Override
 	public BinaryTreeNode findNode(T data) {
-		if (isEmpty()) return null;
-		return searchNode(rootNode, data);
+		BinaryTreeNode n = rootNode;
+		while (n != null) {
+			int cmp = n.compareDataTo(data);
+			if (cmp == 0) return n;
+			else n = (cmp > 0 ? n.getLeftNode() : n.getRightNode());
+		}
+		return null;
 	}
-
-	private BinaryTreeNode searchNode(BinaryTreeNode node, T data) {
-		if (node == null) return null;
-		int cmp = data.compareTo((T) node.getData());
-		if (cmp == 0) return node;
-		if (cmp < 0)
-			return searchNode(node.getLeftNode(), data);
-		return searchNode(node.getRightNode(), data);
-	}
-
-//	if (node == null) return null;
-//	T d = (T) node.getData();
-//		if (d.compareTo(data) == 0)
-//			return node;
-//		else if (d.compareTo(data) < 0)
-//			return searchNode(node.getLeftNode(), data);
-//		else
-//				return searchNode(node.getRightNode(), data);
-
-	//		BinaryTreeNode n = node;
-//		while (n != null) {
-//			int cmp = data.compareTo((T) n.getData());
-//			if (cmp == 0)
-//				return n;
-//			else
-//				n = (cmp < 0 ? n.getLeftNode() : n.getRightNode());
-//		}
-//		return null;
 
 	@Override
 	public void makeTree(T data, BinaryTreeNode leftNode, BinaryTreeNode rightNode) {

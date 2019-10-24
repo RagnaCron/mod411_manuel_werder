@@ -80,17 +80,18 @@ class LinkedBinaryTreeTest {
 		assertEquals(3, tree.maxTreeDepth());
 	}
 
-//	@Test
-//	void findNode() {
-//		tree.makeDefaultAlphabetTree();
-//		assertEquals("F", tree.findNode("F").getData());
-//	}
-//
-//	@Test
-//	void find() {
-//		tree.makeDefaultAlphabetTree();
-//		assertTrue(tree.find("C"));
-//	}
+	@Test
+	void findNode() {
+		String[] arr = {"B", "A", "C"};
+		tree.buildTreeFromArray(arr);
+		assertEquals("A", tree.findNode("A").getData());
+	}
+
+	@Test
+	void find() {
+		tree.makeDefaultAlphabetTree();
+		assertTrue(tree.find("C"));
+	}
 
 	@Test
 	void setRootNodeLeftNode() {

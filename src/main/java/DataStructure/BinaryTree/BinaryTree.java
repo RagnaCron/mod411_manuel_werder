@@ -10,6 +10,9 @@ public interface BinaryTree<T extends Comparable<T>> {
 	void traverse(TraverseOrder strategy);
 	int nodeCount();
 	int maxTreeDepth();
+
+//	void searchAndInsert(BinaryTreeNode node, T Data);
+
 	boolean find(T value);
 	BinaryTreeNode findNode(T data);
 }
