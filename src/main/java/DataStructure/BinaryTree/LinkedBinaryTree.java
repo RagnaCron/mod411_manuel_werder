@@ -8,6 +8,11 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 	private BinaryTreeNode<T> rootNode;
 
 	@Override
+	public void deleteTree() {
+		if (!isEmpty()) rootNode = null;
+	}
+
+	@Override
 	public boolean isEmpty() {
 		return rootNode == null;
 	}

@@ -33,6 +33,15 @@ class LinkedBinaryTreeTest {
 		System.setOut(originalOut);
 	}
 
+
+	@Test
+	void deleteTree() {
+		tree.makeDefaultAlphabetTree();
+		assertFalse(tree.isEmpty());
+		tree.deleteTree();
+		assertTrue(tree.isEmpty());
+	}
+
 	@Test
 	void isEmpty() {
 		assertTrue(tree.isEmpty());
@@ -139,5 +148,6 @@ class LinkedBinaryTreeTest {
 		tree.traverse(TraverseOrder.LEVEL_ORDER);
 		assertEquals(expected, outContent.toString());
 	}
+
 
 }
