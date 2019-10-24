@@ -5,7 +5,7 @@ import DataStructure.Queue.ArrayQueue;
 
 public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> {
 
-	private BinaryTreeNode<T> rootNode;
+	private BinaryTreeNode rootNode;
 
 	@Override
 	public void deleteTree() {
@@ -52,8 +52,66 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 	}
 
 	@Override
+	public boolean find(T data) {
+		return (findNode(data) != null);
+	}
+
+	@Override
+	public BinaryTreeNode findNode(T data) {
+		if (isEmpty()) return null;
+		return searchNode(rootNode, data);
+	}
+
+	private BinaryTreeNode searchNode(BinaryTreeNode node, T data) {
+		if (node == null) return null;
+		int cmp = data.compareTo((T) node.getData());
+		if (cmp == 0) return node;
+		if (cmp < 0)
+			return searchNode(node.getLeftNode(), data);
+		return searchNode(node.getRightNode(), data);
+	}
+
+//	if (node == null) return null;
+//	T d = (T) node.getData();
+//		if (d.compareTo(data) == 0)
+//			return node;
+//		else if (d.compareTo(data) < 0)
+//			return searchNode(node.getLeftNode(), data);
+//		else
+//				return searchNode(node.getRightNode(), data);
+
+	//		BinaryTreeNode n = node;
+//		while (n != null) {
+//			int cmp = data.compareTo((T) n.getData());
+//			if (cmp == 0)
+//				return n;
+//			else
+//				n = (cmp < 0 ? n.getLeftNode() : n.getRightNode());
+//		}
+//		return null;
+
+	@Override
 	public void makeTree(T data, BinaryTreeNode leftNode, BinaryTreeNode rightNode) {
 		this.rootNode = new BinaryTreeNode<>(data, leftNode, rightNode);
+	}
+
+	private static int position = 0;
+	@Override
+	public void buildTreeFromArray(T[] array) {
+		if (isEmpty()) {
+			position = 0;
+			rootNode = buildArray(array, array.length);
+		}
+	}
+
+	private BinaryTreeNode buildArray(T[] array, int size) {
+		if (array == null || size == 0) return null;
+		int sizeLeft = size / 2;
+		int sizeRight = size - sizeLeft - 1;
+		BinaryTreeNode newNode = new BinaryTreeNode<T>(array[position++]);
+		newNode.setLeftNode(buildArray(array, sizeLeft));
+		newNode.setRightNode(buildArray(array, sizeRight));
+		return newNode;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -3,7 +3,6 @@ package DataStructure.BinaryTree;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @Getter
 @Setter
@@ -33,7 +32,6 @@ public class BinaryTreeNode<T extends Comparable<T>> implements Comparable<T> {
 
 	@Override
 	public int compareTo(@NotNull T t) {
-		return data == null ? -1 :  data.compareTo(t);
+		return 0;
 	}
-
 }
