@@ -1,6 +1,6 @@
 package DataStructure.BinaryTree;
 
-public interface BinaryTree<T extends Comparable<T>> {
+public interface BinaryTree<T> {
 	void deleteTree();
 	boolean isEmpty();
 	BinaryTreeNode getRootNode();
@@ -12,7 +12,6 @@ public interface BinaryTree<T extends Comparable<T>> {
 	int maxTreeDepth();
 
 //	void searchAndInsert(BinaryTreeNode node, T Data);
-
 	boolean find(T value);
 	BinaryTreeNode findNode(T data);
 }

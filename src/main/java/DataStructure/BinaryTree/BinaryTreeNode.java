@@ -29,7 +29,7 @@ public class BinaryTreeNode<T extends Comparable<T>> {
 		return data.toString();
 	}
 
-	public int compareDataTo(Comparable c) {
+	int compareDataTo(Comparable c) {
 		return (data == null ? -1 : ((Comparable) data).compareTo(c));
 	}
 
