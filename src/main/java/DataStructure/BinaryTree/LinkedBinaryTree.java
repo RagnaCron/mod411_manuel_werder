@@ -155,6 +155,7 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 		}
 	}
 
+	// Create Tree form array, Niklaus Wirth algorithm
 	private BinaryTreeNode<T> buildArray(T[] array, int size) {
 		if (array == null || size == 0) return null;
 		int sizeLeft = size / 2;
