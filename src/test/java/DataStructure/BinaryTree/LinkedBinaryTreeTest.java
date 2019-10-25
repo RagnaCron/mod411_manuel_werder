@@ -125,7 +125,7 @@ class LinkedBinaryTreeTest {
 	}
 
 	@Test
-	void search() {
+	void searchSuccess() {
 		tree.insert("D");
 		tree.insert("B");
 		tree.insert("F");
@@ -138,8 +138,22 @@ class LinkedBinaryTreeTest {
 		assertEquals("F", tree.search(tree.getRootNode(),"F").getData());
 		assertEquals("C", tree.search(tree.getRootNode(),"C").getData());
 		assertEquals("E", tree.search(tree.getRootNode(),"E").getData());
+	}
+
+	@Test
+	void searchFail() {
+		tree.insert("D");
+		tree.insert("B");
+		tree.insert("F");
+		tree.insert("A");
+		tree.insert("C");
+		tree.insert("E");
+		tree.insert("G");
 
 		assertNull(tree.search(tree.getRootNode(), "H"));
+		assertNull(tree.search(tree.getRootNode(), "a"));
+		assertNull(tree.search(tree.getRootNode(), "Q"));
+		assertNull(tree.search(tree.getRootNode(), "g"));
 	}
 
 	@Test
