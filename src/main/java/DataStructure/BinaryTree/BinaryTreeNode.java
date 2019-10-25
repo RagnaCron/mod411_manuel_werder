@@ -35,7 +35,7 @@ public class BinaryTreeNode<T extends Comparable<T>> {
 
 	@Override
 	public String toString() {
-		return data.toString();
+		return data == null ? "" : data.toString();
 	}
 
 	int compareDataTo(Comparable c) {

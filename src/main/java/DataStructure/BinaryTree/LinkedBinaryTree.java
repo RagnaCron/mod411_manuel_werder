@@ -73,23 +73,22 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 			parent.setLeftNode(node);
 		else
 			parent.setRightNode(node);
-		node.setLeftNode(null);
-		node.setRightNode(null);
 		return true;
 	}
 
 	@Override
 	public boolean remove(Comparable data) {
 		if (isEmpty()) return false;
-		BinaryTreeNode parent = rootNode;
+		BinaryTreeNode parent = new BinaryTreeNode();
 		BinaryTreeNode node = rootNode;
 		BinaryTreeNode child = null;
 		BinaryTreeNode tmp = null;
 		// zu löschenden Knoten suchen
-		while (node != null) {
+		while (node != null)  {
 			int cmp = node.compareDataTo(data);
-			if (cmp == 0)
+			if (cmp == 0) {
 				break;
+			}
 			else {
 				parent = node;
 				node = (cmp > 0 ? node.getLeftNode() : node.getRightNode());
@@ -98,26 +97,26 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 		if (node == null) // Kein Knoten gefunden
 			return false;
 			// Fall 1
-			if (node.isLeftNodeNull() && node.isRightNodeNull())
-				child = null; // Fall 2
-			else if (node.isLeftNodeNull())
-				child = node.getRightNode();
-			else if (node.isRightNodeNull())
-				child = node.getLeftNode();
-			else { // Fall 3
-				// minimales Element suchen
-				child = node.getRightNode();
-				tmp = node;
-				while (!child.isLeftNodeNull()) {
-					tmp = child;
-					child = child.getLeftNode();
-				}
-				child.setLeftNode(node.getLeftNode());
-				if (tmp != node) {
-					tmp.setLeftNode(child.getRightNode());
-					child.setRightNode(node.getRightNode());
-				}
+		if (node.isLeftNodeNull() && node.isRightNodeNull())
+			child = null; // Fall 2
+		else if (node.isLeftNodeNull())
+			child = node.getRightNode();
+		else if (node.isRightNodeNull())
+			child = node.getLeftNode();
+		else { // Fall 3
+			// minimales Element suchen
+			child = node.getRightNode();
+			tmp = node;
+			while (!child.isLeftNodeNull()) {
+				tmp = child;
+				child = child.getLeftNode();
 			}
+			child.setLeftNode(node.getLeftNode());
+			if (tmp != node) {
+				tmp.setLeftNode(child.getRightNode());
+				child.setRightNode(node.getRightNode());
+			}
+		}
 		if (parent.getLeftNode() == node)
 			parent.setLeftNode(child);
 		else

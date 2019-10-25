@@ -16,7 +16,7 @@ class LinkedBinaryTreeTest {
 	private String[] sortedArray;
 
 
-	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	private final PrintStream originalOut = System.out;
 
 	@BeforeEach
@@ -91,9 +91,18 @@ class LinkedBinaryTreeTest {
 		assertTrue(tree.insert("G"));
 		assertTrue(tree.insert("E"));
 
+		tree.traverse(TraverseOrder.IN_ORDER);
+		assertEquals("A B C D E F G ", outContent.toString());
+
+		outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+
 		assertTrue(tree.remove("F"));
 		assertEquals("G", tree.getRootNode().getRightNode().getData());
 		assertEquals("E", tree.getRootNode().getRightNode().getLeftNode().getData());
+
+		tree.traverse(TraverseOrder.IN_ORDER);
+		assertEquals("A B C D E G ", outContent.toString());
 	}
 
 	@Test
