@@ -3,6 +3,11 @@ package DataStructure.BinaryTree;
 
 import DataStructure.Queue.ArrayQueue;
 
+// In this work, is a lot of code that comes from different people.
+// I do not claim ownership of this code, that other people have written.
+// I have not included links to the works of other.
+// It is a simple work of study, and not meant for the productive environment.
+
 public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> {
 
 	private BinaryTreeNode<T> rootNode;
