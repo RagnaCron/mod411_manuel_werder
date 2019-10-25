@@ -8,6 +8,11 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 	private BinaryTreeNode<T> rootNode;
 
 	@Override
+	public void deleteTree() {
+		if (!isEmpty()) rootNode = null;
+	}
+
+	@Override
 	public boolean isEmpty() {
 		return rootNode == null;
 	}
@@ -47,8 +52,117 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 	}
 
 	@Override
+	public boolean insert(Comparable data) {
+		if (isEmpty()) {
+			rootNode = new BinaryTreeNode(data);
+			return true;
+		}
+		BinaryTreeNode parent = null;
+		BinaryTreeNode child = rootNode;
+		while (child != null) {
+			parent = child;
+			int cmp = child.compareDataTo((T) data);
+			if (cmp == 0)
+				return false;
+			else
+				child = (cmp > 0 ? child.getLeftNode() : child.getRightNode());
+		}
+		BinaryTreeNode<T> node = new BinaryTreeNode<>((T) data);
+		assert parent != null;
+		if (parent.compareDataTo(data) > 0)
+			parent.setLeftNode(node);
+		else
+			parent.setRightNode(node);
+		return true;
+	}
+
+	@Override
+	public boolean remove(Comparable data) {
+		if (isEmpty()) return false;
+		BinaryTreeNode parent = new BinaryTreeNode();
+		BinaryTreeNode node = rootNode;
+		BinaryTreeNode child = null;
+		BinaryTreeNode tmp = null;
+		while (node != null)  {
+			int cmp = node.compareDataTo(data);
+			if (cmp == 0) {
+				break;
+			}
+			else {
+				parent = node;
+				node = (cmp > 0 ? node.getLeftNode() : node.getRightNode());
+			}
+		}
+		if (node == null) // No node found
+			return false;
+		// Case 1
+		if (node.isLeftNodeNull() && node.isRightNodeNull())
+			child = null;
+		// Case 2
+		else if (node.isLeftNodeNull())
+			child = node.getRightNode();
+		else if (node.isRightNodeNull())
+			child = node.getLeftNode();
+		else {
+			// Case 3
+			// Smallest Element search
+			child = node.getRightNode();
+			tmp = node;
+			while (!child.isLeftNodeNull()) {
+				tmp = child;
+				child = child.getLeftNode();
+			}
+			child.setLeftNode(node.getLeftNode());
+			if (tmp != node) {
+				tmp.setLeftNode(child.getRightNode());
+				child.setRightNode(node.getRightNode());
+			}
+		}
+		if (parent.getLeftNode() == node)
+			parent.setLeftNode(child);
+		else
+			parent.setRightNode(child);
+		return true;
+	}
+
+
+	@Override
+	public boolean containsValue(T data) {
+		return (search(rootNode, data) != null);
+	}
+
+	@Override
+	public BinaryTreeNode search(BinaryTreeNode root, T element) {
+		while (root != null) {
+			int cmp = root.compareDataTo(element);
+			if (cmp == 0) return root;
+			else root = (cmp > 0 ? root.getLeftNode() : root.getRightNode());
+		}
+		return null;
+	}
+
+	@Override
 	public void makeTree(T data, BinaryTreeNode leftNode, BinaryTreeNode rightNode) {
 		this.rootNode = new BinaryTreeNode<>(data, leftNode, rightNode);
+	}
+
+	private static int position = 0;
+	@Override
+	public void buildTreeFromArray(T[] array) {
+		if (isEmpty()) {
+			position = 0;
+			rootNode = buildArray(array, array.length);
+		}
+	}
+
+	private BinaryTreeNode<T> buildArray(T[] array, int size) {
+		if (array == null || size == 0) return null;
+		int sizeLeft = size / 2;
+		int sizeRight = size - sizeLeft - 1;
+		BinaryTreeNode<T> newNode = new BinaryTreeNode<>(array[position++]);
+		newNode.setLeftNode(buildArray(array, sizeLeft));
+		newNode.setRightNode(buildArray(array, sizeRight));
+		return newNode;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -112,9 +226,9 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 	private void printLevelOrder(ArrayQueue<BinaryTreeNode> queue) {
 		while (!queue.isEmpty()) {
 			BinaryTreeNode node = queue.remove();
-			if (node.getLeftNode() != null)
+			if (!node.isLeftNodeNull())
 				queue.put(node.getLeftNode());
-			if (node.getRightNode() != null)
+			if (!node.isRightNodeNull())
 				queue.put(node.getRightNode());
 			System.out.print(node.toString() + " ");
 		}

@@ -2,12 +2,11 @@ package DataStructure.BinaryTree;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("all")
 @Getter
 @Setter
-public class BinaryTreeNode<T extends Comparable<T>> implements Comparable<T> {
+public class BinaryTreeNode<T extends Comparable<T>> {
 
 	private T data;
 	private BinaryTreeNode leftNode, rightNode;
@@ -26,14 +25,21 @@ public class BinaryTreeNode<T extends Comparable<T>> implements Comparable<T> {
 		this.rightNode = rightNode;
 	}
 
-	@Override
-	public String toString() {
-		return data.toString();
+	public boolean isLeftNodeNull() {
+		return leftNode == null;
+	}
+
+	public boolean isRightNodeNull() {
+		return rightNode == null;
 	}
 
 	@Override
-	public int compareTo(@NotNull T t) {
-		return data == null ? -1 :  data.compareTo(t);
+	public String toString() {
+		return data == null ? "" : data.toString();
+	}
+
+	int compareDataTo(Comparable c) {
+		return data == null ? -1 : ((Comparable) data).compareTo(c);
 	}
 
 }

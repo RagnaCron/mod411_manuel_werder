@@ -12,8 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class LinkedBinaryTreeTest {
 
 	private LinkedBinaryTree<String> tree;
+	private final String[] array = {"A", "B", "C", "D", "E", "F", "G"};
+	private String[] sortedArray;
 
-	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+	private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	private final PrintStream originalOut = System.out;
 
 	@BeforeEach
@@ -31,6 +34,15 @@ class LinkedBinaryTreeTest {
 	@AfterEach
 	void restoreStreams() {
 		System.setOut(originalOut);
+	}
+
+
+	@Test
+	void deleteTree() {
+		tree.makeDefaultAlphabetTree();
+		assertFalse(tree.isEmpty());
+		tree.deleteTree();
+		assertTrue(tree.isEmpty());
 	}
 
 	@Test
@@ -64,6 +76,76 @@ class LinkedBinaryTreeTest {
 	void maxTreeDepth() {
 		tree.makeDefaultAlphabetTree();
 		assertEquals(3, tree.maxTreeDepth());
+		tree.deleteTree();
+		tree.buildTreeFromArray(array);
+		assertEquals(3, tree.maxTreeDepth());
+	}
+
+	@Test
+	void remove() {
+		assertTrue(tree.insert("D"));
+		assertTrue(tree.insert("F"));
+		assertTrue(tree.insert("B"));
+		assertTrue(tree.insert("A"));
+		assertTrue(tree.insert("C"));
+		assertTrue(tree.insert("G"));
+		assertTrue(tree.insert("E"));
+
+		tree.traverse(TraverseOrder.IN_ORDER);
+		assertEquals("A B C D E F G ", outContent.toString());
+
+		outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+
+		assertTrue(tree.remove("F"));
+		assertEquals("G", tree.getRootNode().getRightNode().getData());
+		assertEquals("E", tree.getRootNode().getRightNode().getLeftNode().getData());
+
+		tree.traverse(TraverseOrder.IN_ORDER);
+		assertEquals("A B C D E G ", outContent.toString());
+	}
+
+	@Test
+	void insert() {
+		assertTrue(tree.isEmpty());
+		assertTrue(tree.insert("D"));
+		assertFalse(tree.isEmpty());
+		assertTrue(tree.insert("F"));
+		assertTrue(tree.insert("B"));
+		assertEquals("F", tree.getRootNode().getRightNode().getData());
+		assertEquals("B", tree.getRootNode().getLeftNode().getData());
+		assertTrue(tree.insert("A"));
+		assertEquals("A", tree.getRootNode().getLeftNode().getLeftNode().getData());
+		assertTrue(tree.insert("C"));
+		assertEquals("C", tree.getRootNode().getLeftNode().getRightNode().getData());
+		assertTrue(tree.insert("G"));
+		assertEquals("G", tree.getRootNode().getRightNode().getRightNode().getData());
+		assertTrue(tree.insert("E"));
+		assertEquals("E", tree.getRootNode().getRightNode().getLeftNode().getData());
+	}
+
+	@Test
+	void search() {
+		tree.insert("D");
+		tree.insert("B");
+		tree.insert("F");
+		tree.insert("A");
+		tree.insert("C");
+		tree.insert("E");
+		tree.insert("G");
+
+		assertEquals("A", tree.search(tree.getRootNode(),"A").getData());
+		assertEquals("F", tree.search(tree.getRootNode(),"F").getData());
+		assertEquals("C", tree.search(tree.getRootNode(),"C").getData());
+		assertEquals("E", tree.search(tree.getRootNode(),"E").getData());
+
+		assertNull(tree.search(tree.getRootNode(), "H"));
+	}
+
+	@Test
+	void containsValue() {
+		tree.makeDefaultAlphabetTree();
+		assertTrue(tree.containsValue("C"));
 	}
 
 	@Test
@@ -139,5 +221,38 @@ class LinkedBinaryTreeTest {
 		tree.traverse(TraverseOrder.LEVEL_ORDER);
 		assertEquals(expected, outContent.toString());
 	}
+
+	@Test
+	void buildTreeFromArrayInOrderCheck() {
+		tree.buildTreeFromArray(array);
+		assertFalse(tree.isEmpty());
+		tree.traverse(TraverseOrder.IN_ORDER);
+		assertEquals("C B D A F E G ", outContent.toString());
+	}
+
+	@Test
+	void buildTreeFromArrayPreOrderCheck() {
+		tree.buildTreeFromArray(array);
+		assertFalse(tree.isEmpty());
+		tree.traverse(TraverseOrder.PRE_ORDER);
+		assertEquals("A B C D E F G ", outContent.toString());
+	}
+
+	@Test
+	void buildTreeFromArrayPostOrderCheck() {
+		tree.buildTreeFromArray(array);
+		assertFalse(tree.isEmpty());
+		tree.traverse(TraverseOrder.POST_ORDER);
+		assertEquals("C D B F G E A ", outContent.toString());
+	}
+
+	@Test
+	void buildTreeFromArrayLevelOrderCheck() {
+		tree.buildTreeFromArray(array);
+		assertFalse(tree.isEmpty());
+		tree.traverse(TraverseOrder.LEVEL_ORDER);
+		assertEquals("A B E C D F G ", outContent.toString());
+	}
+
 
 }
