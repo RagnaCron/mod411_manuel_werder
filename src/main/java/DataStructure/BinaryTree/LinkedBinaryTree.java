@@ -68,7 +68,6 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 				child = (cmp > 0 ? child.getLeftNode() : child.getRightNode());
 		}
 		BinaryTreeNode<T> node = new BinaryTreeNode<>((T) data);
-		assert parent != null;
 		if (parent.compareDataTo(data) > 0)
 			parent.setLeftNode(node);
 		else
