@@ -83,7 +83,6 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 		BinaryTreeNode node = rootNode;
 		BinaryTreeNode child = null;
 		BinaryTreeNode tmp = null;
-		// zu löschenden Knoten suchen
 		while (node != null)  {
 			int cmp = node.compareDataTo(data);
 			if (cmp == 0) {
@@ -94,17 +93,19 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 				node = (cmp > 0 ? node.getLeftNode() : node.getRightNode());
 			}
 		}
-		if (node == null) // Kein Knoten gefunden
+		if (node == null) // No node found
 			return false;
-			// Fall 1
+		// Case 1
 		if (node.isLeftNodeNull() && node.isRightNodeNull())
-			child = null; // Fall 2
+			child = null;
+		// Case 2
 		else if (node.isLeftNodeNull())
 			child = node.getRightNode();
 		else if (node.isRightNodeNull())
 			child = node.getLeftNode();
-		else { // Fall 3
-			// minimales Element suchen
+		else {
+			// Case 3
+			// Smallest Element search
 			child = node.getRightNode();
 			tmp = node;
 			while (!child.isLeftNodeNull()) {
@@ -126,17 +127,16 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 
 
 	@Override
-	public boolean find(T data) {
-		return (findNode(data) != null);
+	public boolean containsValue(T data) {
+		return (search(rootNode, data) != null);
 	}
 
 	@Override
-	public BinaryTreeNode findNode(T data) {
-		BinaryTreeNode n = rootNode;
-		while (n != null) {
-			int cmp = n.compareDataTo(data);
-			if (cmp == 0) return n;
-			else n = (cmp > 0 ? n.getLeftNode() : n.getRightNode());
+	public BinaryTreeNode search(BinaryTreeNode root, T element) {
+		while (root != null) {
+			int cmp = root.compareDataTo(element);
+			if (cmp == 0) return root;
+			else root = (cmp > 0 ? root.getLeftNode() : root.getRightNode());
 		}
 		return null;
 	}
@@ -147,7 +147,6 @@ public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 	}
 
 	private static int position = 0;
-
 	@Override
 	public void buildTreeFromArray(T[] array) {
 		if (isEmpty()) {

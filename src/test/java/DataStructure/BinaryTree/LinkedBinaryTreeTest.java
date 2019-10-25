@@ -125,16 +125,27 @@ class LinkedBinaryTreeTest {
 	}
 
 	@Test
-	void findNode() {
-		sortedArray = new String[]{"B", "A", "C"};
-		tree.buildTreeFromArray(sortedArray);
-		assertEquals("A", tree.findNode("A").getData());
+	void search() {
+		tree.insert("D");
+		tree.insert("B");
+		tree.insert("F");
+		tree.insert("A");
+		tree.insert("C");
+		tree.insert("E");
+		tree.insert("G");
+
+		assertEquals("A", tree.search(tree.getRootNode(),"A").getData());
+		assertEquals("F", tree.search(tree.getRootNode(),"F").getData());
+		assertEquals("C", tree.search(tree.getRootNode(),"C").getData());
+		assertEquals("E", tree.search(tree.getRootNode(),"E").getData());
+
+		assertNull(tree.search(tree.getRootNode(), "H"));
 	}
 
 	@Test
-	void find() {
+	void containsValue() {
 		tree.makeDefaultAlphabetTree();
-		assertTrue(tree.find("C"));
+		assertTrue(tree.containsValue("C"));
 	}
 
 	@Test
